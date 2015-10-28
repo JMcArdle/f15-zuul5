@@ -1,8 +1,11 @@
 /**
+ * This class is part of _____, a text based adventure game created
+ *  by modifying the "World of Zuul" game.
+ * 
  * Representations for all the valid command words for the game.
  * 
- * @author  Michael Kölling and David J. Barnes
- * @version 2011.08.09
+ * @author  Scott Taylor
+ * @version 10/28/2015
  */
 public enum CommandWord
 {

@@ -1,0 +1,8 @@
+#BlueJ class context
+comment0.params=
+comment0.target=RoomCreator()
+comment0.text=\r\n\ Constructor\ for\ objects\ of\ class\ RoomCreator\r\n
+comment1.params=
+comment1.target=Room\ makeRooms()
+comment1.text=\r\n\ Creates\ all\ the\ rooms\r\n
+numComments=2

@@ -1,8 +1,6 @@
 /**
- *  This class is the main class of the "World of Zuul" application. 
- *  "World of Zuul" is a very simple, text based adventure game.  Users 
- *  can walk around some scenery. That's all. It should really be extended 
- *  to make it more interesting!
+ *  This class is part of _____, a text based adventure game created
+ *  by modifying the "World of Zuul" game.
  * 
  *  To play this game, create an instance of this class and call the "play"
  *  method.
@@ -11,20 +9,22 @@
  *  rooms, creates the parser and starts the game.  It also evaluates and
  *  executes the commands that the parser returns.
  * 
- * @author  Michael Kölling and David J. Barnes
- * @version 2011.08.09
+ * @author  Scott Taylor
+ * @version 10/28/2015
  */
 
 public class Game 
 {
     private Parser parser;
     private Room currentRoom;
+    private RoomCreator setUp;
 
     /**
      * Create the game and initialise its internal map.
      */
     public Game() 
     {
+        setUp = new RoomCreator();
         createRooms();
         parser = new Parser();
     }
@@ -34,19 +34,7 @@ public class Game
      */
     private void createRooms()
     {
-        Room outside, theater, pub, lab, office;
-
-        // create the rooms
-        outside = new Room("outside the main entrance of the university");
-        theater = new Room("in a lecture theater");
-        pub = new Room("in the campus pub");
-        lab = new Room("in a computing lab");
-        office = new Room("in the computing admin office");
-
-        // initialise room exits
-        outside.addExit("east", theater);
-
-        currentRoom = outside;  // start game outside
+        currentRoom = setUp.makeRooms();
     }
 
     /**

@@ -1,20 +1,20 @@
 /**
- * This class is part of the "World of Zuul" application. 
- * "World of Zuul" is a very simple, text based adventure game.  
+ * This class is part of _____, a text based adventure game created
+ *  by modifying the "World of Zuul" game.  
  *
  * This class holds information about a command that was issued by the user.
- * A command currently consists of two parts: a CommandWord and a string
- * (for example, if the command was "take map", then the two parts
- * are TAKE and "map").
+ * A command currently consists of 5 parts: a CommandWord and 4 strings
+ * (for example, if the command was "take map", then the first two parts
+ * are TAKE and "map" while the remainder are <null>).
  * 
  * The way this is used is: Commands are already checked for being valid
  * command words. If the user entered an invalid command (a word that is not
  * known) then the CommandWord is UNKNOWN.
  *
- * If the command had only one word, then the second word is <null>.
+ * If the command does not have 5 words, then the remaining words are <null>.
  * 
- * @author  Michael Kölling and David J. Barnes
- * @version 2011.08.09
+ * @author  Scott Taylor
+ * @version 10/28/2015
  */
 
 public class Command
