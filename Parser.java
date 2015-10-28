@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 
 /**
  * This class is part of the "World of Zuul" application. 
@@ -38,29 +39,46 @@ public class Parser
         String inputLine;   // will hold the full input line
         String word1 = null;
         String word2 = null;
+        String word3 = null;
+        String word4 = null;
+        String word5 = null;
 
         System.out.print("> ");     // print prompt
 
         inputLine = reader.nextLine();
+        inputLine = inputLine.trim();
 
         // Find up to two words on the line.
         Scanner tokenizer = new Scanner(inputLine);
-        if(tokenizer.hasNext()) {
-            word1 = tokenizer.next();      // get first word
-            if(tokenizer.hasNext()) {
-                word2 = tokenizer.next();      // get second word
-                // note: we just ignore the rest of the input line.
+        if(tokenizer.hasNext())
+        {
+            word1 = tokenizer.next();
+            if(tokenizer.hasNext())
+            {
+                word2 = tokenizer.next();
+                if(tokenizer.hasNext()) 
+                {
+                    word3 = tokenizer.next();
+                    if(tokenizer.hasNext())
+                    {
+                        word4 = tokenizer.next();
+                        if(tokenizer.hasNext())
+                        {
+                            word5 = tokenizer.next();      // get second word
+                        }
+                    }
+                }
             }
         }
 
-        return new Command(commands.getCommandWord(word1), word2);
+        return new Command(commands.getCommandWord(word1), word2, word3, word4, word5);
     }
 
-    /**
-     * Print out a list of valid command words.
-     */
-    public void showCommands()
-    {
-        commands.showAll();
-    }
+//     /**
+//      * Print out a list of valid command words.
+//      */
+//     public void showCommands()
+//     {
+//         commands.showAll();
+//     }
 }

@@ -38,45 +38,54 @@ public class Room
      * @param direction The direction of the exit.
      * @param neighbor  The room to which the exit leads.
      */
-    public void setExit(String direction, Room neighbor) 
+    public void addExit(String direction, Room neighbor) 
     {
         exits.put(direction, neighbor);
     }
-
+    
+    /**
+     * Remove an exit from this room
+     * @param del the exit to delete
+     */
+    public void addExit(String del)
+    {
+        exits.remove(del);
+    }
+    
     /**
      * @return The short description of the room
      * (the one that was defined in the constructor).
      */
-    public String getShortDescription()
+    public String getDescription()
     {
         return description;
     }
 
-    /**
-     * Return a description of the room in the form:
-     *     You are in the kitchen.
-     *     Exits: north west
-     * @return A long description of this room
-     */
-    public String getLongDescription()
-    {
-        return "You are " + description + ".\n" + getExitString();
-    }
+//     /**
+//      * Return a description of the room in the form:
+//      *     You are in the kitchen.
+//      *     Exits: north west
+//      * @return A long description of this room
+//      */
+//     public String getLongDescription()
+//     {
+//         return "You are " + description + ".\n" + getExitString();
+//     }
 
-    /**
-     * Return a string describing the room's exits, for example
-     * "Exits: north west".
-     * @return Details of the room's exits.
-     */
-    private String getExitString()
-    {
-        String returnString = "Exits:";
-        Set<String> keys = exits.keySet();
-        for(String exit : keys) {
-            returnString += " " + exit;
-        }
-        return returnString;
-    }
+//     /**
+//      * Return a string describing the room's exits, for example
+//      * "Exits: north west".
+//      * @return Details of the room's exits.
+//      */
+//     private String getExitString()
+//     {
+//         String returnString = "Exits:";
+//         Set<String> keys = exits.keySet();
+//         for(String exit : keys) {
+//             returnString += " " + exit;
+//         }
+//         return returnString;
+//     }
 
     /**
      * Return the room that is reached if we go from this room in direction

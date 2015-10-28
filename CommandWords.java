@@ -54,14 +54,14 @@ public class CommandWords
         return validCommands.containsKey(aString);
     }
 
-    /**
-     * Print all valid commands to System.out.
-     */
-    public void showAll() 
-    {
-        for(String command : validCommands.keySet()) {
-            System.out.print(command + "  ");
-        }
-        System.out.println();
-    }
+//     /**
+//      * Print all valid commands to System.out.
+//      */
+//     public void showAll() 
+//     {
+//         for(String command : validCommands.keySet()) {
+//             System.out.print(command + "  ");
+//         }
+//         System.out.println();
+//     }
 }

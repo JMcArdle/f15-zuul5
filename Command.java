@@ -21,6 +21,9 @@ public class Command
 {
     private CommandWord commandWord;
     private String secondWord;
+    private String thirdWord;
+    private String fourthWord;
+    private String fifthWord;
 
     /**
      * Create a command object. First and second words must be supplied, but
@@ -29,10 +32,14 @@ public class Command
      *                  was not recognised.
      * @param secondWord The second word of the command. May be null.
      */
-    public Command(CommandWord commandWord, String secondWord)
+    public Command(CommandWord commandWord, String secondWord, String thirdWord,
+                   String fourthWord, String fifthWord)
     {
         this.commandWord = commandWord;
         this.secondWord = secondWord;
+        this.thirdWord = thirdWord;
+        this.fourthWord = fourthWord;
+        this.fifthWord = fifthWord;
     }
 
     /**
@@ -54,6 +61,33 @@ public class Command
     }
 
     /**
+     * @return The third word of this command. Returns null if there was no
+     * third word.
+     */
+    public String getThirdWord()
+    {
+        return thirdWord;
+    }
+   
+    /**
+     * @return The fourth word of this command. Returns null if there was no
+     * fourth word.
+     */
+    public String getFourthWord()
+    {
+        return fourthWord;
+    }
+    
+    /**
+     * @return The fifth word of this command. Returns null if there was no
+     * fifth word.
+     */
+    public String getFifthWord()
+    {
+        return fifthWord;
+    }
+    
+    /**
      * @return true if this command was not understood.
      */
     public boolean isUnknown()
@@ -64,9 +98,22 @@ public class Command
     /**
      * @return true if the command has a second word.
      */
-    public boolean hasSecondWord()
+    public int numberOfWords()
     {
-        return (secondWord != null);
+        int counter = 0;
+        if (commandWord != null)
+            counter++;
+        if (secondWord != null)
+            counter++;
+        if (thirdWord != null)
+            counter++;
+        if (fourthWord != null)
+            counter++;
+        if (fifthWord != null)
+            counter++;
+        return counter;
     }
+    
+    
 }
 

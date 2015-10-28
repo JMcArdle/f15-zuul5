@@ -44,18 +44,7 @@ public class Game
         office = new Room("in the computing admin office");
 
         // initialise room exits
-        outside.setExit("east", theater);
-        outside.setExit("south", lab);
-        outside.setExit("west", pub);
-
-        theater.setExit("west", outside);
-
-        pub.setExit("east", outside);
-
-        lab.setExit("north", outside);
-        lab.setExit("east", office);
-
-        office.setExit("west", lab);
+        outside.addExit("east", theater);
 
         currentRoom = outside;  // start game outside
     }
@@ -64,7 +53,7 @@ public class Game
      *  Main play routine.  Loops until end of play.
      */
     public void play() 
-    {            
+    {
         printWelcome();
 
         // Enter the main command loop.  Here we repeatedly read commands and
@@ -88,7 +77,7 @@ public class Game
         System.out.println("World of Zuul is a new, incredibly boring adventure game.");
         System.out.println("Type 'help' if you need help.");
         System.out.println();
-        System.out.println(currentRoom.getLongDescription());
+        System.out.println(currentRoom.getDescription());
     }
 
     /**
@@ -104,7 +93,7 @@ public class Game
 
         switch (commandWord) {
             case UNKNOWN:
-                System.out.println("I don't know what you mean...");
+                System.out.println("You can\'t do that here.");
                 break;
 
             case HELP:
@@ -131,11 +120,8 @@ public class Game
      */
     private void printHelp() 
     {
-        System.out.println("You are lost. You are alone. You wander");
-        System.out.println("around at the university.");
-        System.out.println();
-        System.out.println("Your command words are:");
-        parser.showCommands();
+        System.out.println("Need to put stuff here");
+//         parser.showCommands();
     }
 
     /** 
@@ -144,23 +130,36 @@ public class Game
      */
     private void goRoom(Command command) 
     {
-        if(!command.hasSecondWord()) {
+        if(command.numberOfWords() < 2) {
             // if there is no second word, we don't know where to go...
             System.out.println("Go where?");
             return;
         }
 
         String direction = command.getSecondWord();
+        if (direction.equalsIgnoreCase("to")||
+            direction.equalsIgnoreCase("toward")||
+            direction.equalsIgnoreCase("into"))
+        {
+            direction = command.getThirdWord();
+            if (direction.equalsIgnoreCase("the")||
+                direction.equalsIgnoreCase("that"))
+            {
+                direction = command.getFourthWord();
+            }
+        }
 
         // Try to leave current room.
         Room nextRoom = currentRoom.getExit(direction);
 
-        if (nextRoom == null) {
-            System.out.println("There is no door!");
+        if (nextRoom == null)
+        {
+            System.out.println("You can\'t go that way.");
         }
-        else {
+        else
+        {
             currentRoom = nextRoom;
-            System.out.println(currentRoom.getLongDescription());
+            System.out.println(currentRoom.getDescription());
         }
     }
 
@@ -171,11 +170,32 @@ public class Game
      */
     private boolean quit(Command command) 
     {
-        if(command.hasSecondWord()) {
-            System.out.println("Quit what?");
-            return false;
+        if(command.numberOfWords() > 1)
+        {
+            if (command.getSecondWord().equalsIgnoreCase("the")||
+                command.getSecondWord().equalsIgnoreCase("this"))
+            {
+                if (command.getThirdWord().equalsIgnoreCase("game"))
+                {
+                    return true;
+                }
+                else
+                {
+                    System.out.println("I don\'t understand, quit what?");
+                    return false;
+                }
+            }
+            else if (command.getSecondWord().equalsIgnoreCase("game"))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
-        else {
+        else
+        {
             return true;  // signal that we want to quit
         }
     }
