@@ -1,0 +1,8 @@
+#BlueJ class context
+comment0.params=talk\ look\ attack\ leer\ lick\ torture\ escape\ listen\ dodge\ grab
+comment0.target=NPC(java.lang.String,\ java.lang.String,\ java.lang.String,\ java.lang.String,\ java.lang.String,\ java.lang.String,\ java.lang.String,\ java.lang.String,\ java.lang.String,\ java.lang.String)
+comment1.params=toAdd
+comment1.target=void\ addTalk(java.lang.String)
+comment2.params=toRemove
+comment2.target=boolean\ removeTalk(java.lang.String)
+numComments=3
