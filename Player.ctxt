@@ -1,0 +1,23 @@
+#BlueJ class context
+comment0.params=
+comment0.target=Player()
+comment1.params=item
+comment1.target=void\ addToInventory(Item)
+comment2.params=item
+comment2.target=boolean\ removeFromInventory(Item)
+comment3.params=item
+comment3.target=boolean\ equip(Item)
+comment3.text=\r\n\ makes\ the\ player\ hold\ the\ item\r\n\ \r\n\ @param\ item\ what\ item\ they\ want\ to\ hold\r\n\ @return\ boolean\ whether\ they\ could\ equip\ it\ or\ not\r\n
+comment4.params=item
+comment4.target=boolean\ takeAwayItem(Item)
+comment4.text=\r\n\ takes\ item\ away\ from\ player\r\n\ \r\n\ @param\ item\ to\ take\ away\r\n\ @return\ boolean\ whether\ it\ was\ successful\ or\ not\r\n\ \r\n
+comment5.params=item
+comment5.target=int\ has(Item)
+comment5.text=\r\n\ finds\ if\ the\ player\ has\ the\ item\r\n\ \r\n\ @param\ item\ the\ item\ to\ search\ for\r\n\ @return\ int\ a\ value\ indicating\ whether\ the\ item\ is\ missing,\r\n\ in\ the\ player's\ inventory,\ or\ equipped\r\n
+comment6.params=item
+comment6.target=Item\ takeFromInventory(Item)
+comment6.text=\r\n\ removes\ an\ item\ from\ the\ player's\ inventory\r\n\ and\ returns\ the\ item\ removed\r\n\ \r\n\ @param\ item\ the\ item\ to\ take\r\n\ @return\ Item\ the\ item\ removed\r\n
+comment7.params=
+comment7.target=java.util.ArrayList\ getInventory()
+comment7.text=\r\n\ returns\ the\ players's\ inventory\r\n\ @return\ an\ ArrayList\ containing\ the\ player's\ inventory\r\n
+numComments=8

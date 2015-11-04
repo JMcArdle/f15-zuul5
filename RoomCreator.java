@@ -27,8 +27,8 @@ public class RoomCreator
         Room outside, room2, room3, roomEtc;
 
         // create the rooms like this
-        outside = new Room("outside the main entrance of the university");
-        room2 = new Room("a second room");
+        outside = new Room("outside","outside the main entrance of the university");
+        room2 = new Room("room 2","a second room");
 
         // initialise room exits like this
         outside.addExit("east", room2);

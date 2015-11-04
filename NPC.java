@@ -2,13 +2,18 @@ import java.util.ArrayList;
 import java.util.Random;
 
 /**
- * Write a description of class NPC here.
+ * This class is part of _____, a text based adventure game created
+ *  by modifying the "World of Zuul" game.
+ *  
+ *  This object contains all the information on the NPCs
+ *  in the game and their reactions to all applicable commands
  * 
  * @author Scott Taylor
  * @version 11/2/2015
  */
 public class NPC
 {
+    private String name;
     private ArrayList<String> talk;
     private String look;
     private String attack;
@@ -24,6 +29,7 @@ public class NPC
      * Constructor for creating each npc
      * Takes a string for each possible action to perform on the NPC
      * 
+     * @param name their name
      * @param talk when you talk to them
      * @param look when you look at them
      * @param attack when you attack them
@@ -35,11 +41,11 @@ public class NPC
      * @param when you dodge them
      * @param when you grab them
      */
-    public NPC(String talk, String look, String attack, String leer, String lick, String torture,
+    public NPC(String name, String look, String attack, String leer, String lick, String torture,
                 String escape, String listen, String dodge, String grab)
     {
+        this.name = name;
         this.talk = new ArrayList<String>();
-        this.talk.add(talk);
         this.look = look;
         this.attack = attack;
         this.leer = leer;
@@ -53,6 +59,18 @@ public class NPC
     
     
     ///Setters///
+    
+    
+    /**
+     * Sets their name
+     * 
+     * @param set attribute to set it to
+     * 
+     */
+    public void setName(String set)
+    {
+        name = set;
+    }
         
     /**
      * Method for adding a talking phrase to the npc
@@ -186,6 +204,18 @@ public class NPC
     
     ///Getters///
     
+    
+    /**
+     * Gets their name
+     * 
+     * @return String the String to return
+     * 
+     */
+    public String getName()
+    {
+        return name;
+    }
+        
     /**
      * Gets one of their talking responses
      * 

@@ -18,6 +18,7 @@ public class Game
     private Parser parser;
     private Room currentRoom;
     private RoomCreator setUp;
+    private Player player;
 
     /**
      * Create the game and initialise its internal map.
@@ -26,6 +27,7 @@ public class Game
     {
         setUp = new RoomCreator();
         createRooms();
+        player = new Player();
         parser = new Parser();
     }
 
@@ -75,6 +77,7 @@ public class Game
      */
     private boolean processCommand(Command command) 
     {
+        CommandProcessor processor;
         boolean wantToQuit = false;
 
         CommandWord commandWord = command.getCommandWord();
@@ -88,12 +91,13 @@ public class Game
                 printHelp();
                 break;
 
-            case GO:
-                goRoom(command);
-                break;
-
             case QUIT:
                 wantToQuit = quit(command);
+                break;
+                
+            default:
+                processor = new CommandProcessor(command, currentRoom, player);
+                processor.processCommand();
                 break;
         }
         return wantToQuit;
@@ -109,48 +113,8 @@ public class Game
     private void printHelp() 
     {
         System.out.println("Need to put stuff here");
-//         parser.showCommands();
     }
-
-    /** 
-     * Try to go in one direction. If there is an exit, enter the new
-     * room, otherwise print an error message.
-     */
-    private void goRoom(Command command) 
-    {
-        if(command.numberOfWords() < 2) {
-            // if there is no second word, we don't know where to go...
-            System.out.println("Go where?");
-            return;
-        }
-
-        String direction = command.getSecondWord();
-        if (direction.equalsIgnoreCase("to")||
-            direction.equalsIgnoreCase("toward")||
-            direction.equalsIgnoreCase("into"))
-        {
-            direction = command.getThirdWord();
-            if (direction.equalsIgnoreCase("the")||
-                direction.equalsIgnoreCase("that"))
-            {
-                direction = command.getFourthWord();
-            }
-        }
-
-        // Try to leave current room.
-        Room nextRoom = currentRoom.getExit(direction);
-
-        if (nextRoom == null)
-        {
-            System.out.println("You can\'t go that way.");
-        }
-        else
-        {
-            currentRoom = nextRoom;
-            System.out.println(currentRoom.getDescription());
-        }
-    }
-
+    
     /** 
      * "Quit" was entered. Check the rest of the command to see
      * whether we really quit the game.
