@@ -160,7 +160,7 @@ public class InternalCommandProcessor
                 Room goTo = resolver.resolveRoom(arg2);
                 if (goTo != null)
                 {
-                    findNPC(npcToMove).removeNPC(npcToMove);
+                    resolver.findNPC(npcToMove).removeNPC(npcToMove);
                     goTo.addNPC(npcToMove);
                 }
                 else
@@ -204,57 +204,6 @@ public class InternalCommandProcessor
     private void goUse()
     {}
     
-    
-    
-    
-    
-    //For finding NPCs and Items
-    
-    /**
-     * finds what room an NPC is in
-     * 
-     * @param target the NPC to look for
-     * @return Room what room they are in
-     */
-    private Room findNPC(NPC target)
-    {
-        Room in = null;
-        breaker:for(Room room : allRooms)
-        {
-            for(NPC npc : room.getNPCS())
-            {
-                if(npc == target)
-                {
-                    in = room;
-                    break breaker;
-                }
-            }
-        }
-        return in;
-    }
-    
-    /**
-     * finds what room an item is in
-     * 
-     * @param target the item to look for
-     * @return Room what room it is in
-     */
-    private Room findItem(Item target)
-    {
-        Room in = null;
-        breaker:for(Room room : allRooms)
-        {
-            for(Item item : room.getItems())
-            {
-                if(item == target)
-                {
-                    in = room;
-                    break breaker;
-                }
-            }
-        }
-        return in;
-    }
 
     
 }

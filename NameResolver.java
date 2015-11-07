@@ -133,4 +133,121 @@ public class NameResolver
         return found;
     }
 
+    
+    
+    
+    //methods to find the location of NPCs and objects//
+    
+    
+    /**
+     * finds what room an NPC is in
+     * 
+     * @param target the NPC to look for
+     * @return Room what room they are in
+     */
+    public Room findNPC(NPC target)
+    {
+        Room in = null;
+        breaker:for(Room room : allRooms)
+        {
+            for(NPC npc : room.getNPCS())
+            {
+                if(npc == target)
+                {
+                    in = room;
+                    break breaker;
+                }
+            }
+        }
+        return in;
+    }
+    
+    
+    /**
+     * finds what room an NPC is in given a string
+     * 
+     * @param target the string of the npc name to look for
+     * @return Room what room they are in
+     */
+    public Room findNPC(String target)
+    {
+        NPC npc = resolveNPCFromCurrentRoom(target);
+        if (npc == null)
+        {
+            npc = resolveNPCFromGlobal(target);
+        }
+        Room in = null;
+        if (npc != null)
+        {
+            breaker:for(Room room : allRooms)
+            {
+                for(NPC search : room.getNPCS())
+                {
+                    if(search.getName() == target)
+                    {
+                        in = room;
+                        break breaker;
+                    }
+                }
+            }
+        }
+        return in;
+    }
+    
+    
+    
+    /**
+     * finds what room an item is in
+     * 
+     * @param target the item to look for
+     * @return Room what room it is in
+     */
+    public Room findItem(Item target)
+    {
+        Room in = null;
+        breaker:for(Room room : allRooms)
+        {
+            for(Item item : room.getItems())
+            {
+                if(item == target)
+                {
+                    in = room;
+                    break breaker;
+                }
+            }
+        }
+        return in;
+    }
+    
+    /**
+     * finds what room an item is in given a string
+     * 
+     * @param target the string of the item name to look for
+     * @return Room what room it is in
+     */
+    public Room findItem(String target)
+    {
+        Item item = resolveItemFromCurrentRoom(target);
+        if (item == null)
+        {
+            item = resolveItemFromGlobal(target);
+        }
+        Room in = null;
+        if (item != null)
+        {
+            breaker:for(Room room : allRooms)
+            {
+                for(Item search : room.getItems())
+                {
+                    if(search.getName() == target)
+                    {
+                        in = room;
+                        break breaker;
+                    }
+                }
+            }
+        }
+        return in;
+    }
+    
 }
