@@ -1,0 +1,23 @@
+#BlueJ class context
+comment0.params=currentRoom\ player\ allRooms
+comment0.target=NameResolver(Room,\ Player,\ java.util.ArrayList)
+comment0.text=\r\n\ Constructor\ for\ objects\ of\ class\ NameResolver\r\n
+comment1.params=target
+comment1.target=Room\ resolveRoom(java.lang.String)
+comment1.text=\r\n\ finds\ a\ room\ based\ on\ its\ name\r\n
+comment2.params=target
+comment2.target=NPC\ resolveNPCFromCurrentRoom(java.lang.String)
+comment2.text=\r\n\ finds\ an\ npc\ in\ the\ room\ based\ on\ name\r\n
+comment3.params=target
+comment3.target=NPC\ resolveNPCFromGlobal(java.lang.String)
+comment3.text=\r\n\ finds\ an\ npc\ in\ the\ entire\ map\ based\ on\ name\r\n
+comment4.params=target
+comment4.target=Item\ resolveItemFromInventory(java.lang.String)
+comment4.text=\r\n\ finds\ item\ in\ inventory\ based\ on\ name\r\n
+comment5.params=target
+comment5.target=Item\ resolveItemFromCurrentRoom(java.lang.String)
+comment5.text=\r\n\ finds\ an\ item\ in\ the\ room\ based\ on\ name\r\n
+comment6.params=target
+comment6.target=Item\ resolveItemFromGlobal(java.lang.String)
+comment6.text=\r\n\ finds\ an\ item\ in\ the\ entire\ map\ based\ on\ name\r\n
+numComments=7

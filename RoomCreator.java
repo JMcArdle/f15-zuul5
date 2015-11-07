@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 
 /**
  * This class is part of _____, a text based adventure game created
@@ -10,6 +11,7 @@
  */
 public class RoomCreator
 {
+    private ArrayList<Room> allRooms;
 
     /**
      * Constructor for objects of class RoomCreator
@@ -33,8 +35,22 @@ public class RoomCreator
         // initialise room exits like this
         outside.addExit("east", room2);
         
+        //then add the rooms to the master list of all the rooms
+        allRooms.add(outside);
+        allRooms.add(room2);
+        
         
         //return whatever room they start in
         return outside;
+    }
+    
+    
+    /**
+     * passes back all the rooms created in a list
+     * so they can be accessed by the command processor
+     */
+    public ArrayList<Room> getRoomList()
+    {
+        return allRooms;
     }
 }

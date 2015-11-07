@@ -23,6 +23,7 @@ public class Room
     ///fields///
     private String name;
     private String description;
+    private String extraDescription;
     private HashMap<String, Room> exits;        // stores exits of this room.
     private ArrayList<NPC> npcs;
     private ArrayList<Item> items;
@@ -40,6 +41,7 @@ public class Room
     {
         this.name = name;
         this.description = description;
+        extraDescription = "You see nothing of importance.";
         exits = new HashMap<String, Room>();
         npcs = new ArrayList<NPC>();
         items = new ArrayList<Item>();
@@ -47,8 +49,36 @@ public class Room
     
     
     ///methods///
-
+    
     //setters//
+    
+    /**
+     * Change the name of the room
+     * @param name the new name
+     */
+    public void setName(String name)
+    {
+        this.name = name;
+    }
+        
+    /**
+     * Reset the description of the room
+     * @param descriptioin the new description
+     */
+    public void setDescription(String description)
+    {
+        this.description = description;
+    }
+    
+    /**
+     * Change the extra description when the player looks around
+     * @param description the extra text to put in
+     */
+    public void setExtraDescription(String description)
+    {
+        extraDescription = description;
+    }
+    
     /**
      * Define an exit from this room.
      * @param direction The direction of the exit.
@@ -105,7 +135,9 @@ public class Room
         items.remove(rem);
     }
     
+    
     //getters//
+    
     
     /**
      * returns the name of the room
@@ -125,6 +157,16 @@ public class Room
     public String getDescription()
     {
         return description;
+    }
+    
+    /**
+     * returns the extra desctiption of the room
+     * 
+     * @return the extra info when looking around
+     */
+    public String getExtraDescription()
+    {
+        return extraDescription;
     }
     
     /**

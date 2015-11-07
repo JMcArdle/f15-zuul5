@@ -19,6 +19,7 @@ public class Game
     private Room currentRoom;
     private RoomCreator setUp;
     private Player player;
+    private CommandProcessor processor;
 
     /**
      * Create the game and initialise its internal map.
@@ -26,7 +27,6 @@ public class Game
     public Game() 
     {
         setUp = new RoomCreator();
-        createRooms();
         player = new Player();
         parser = new Parser();
     }
@@ -44,8 +44,10 @@ public class Game
      */
     public void play() 
     {
+        createRooms();
+        processor = new CommandProcessor(currentRoom, player, setUp.getRoomList());
+        
         printWelcome();
-
         // Enter the main command loop.  Here we repeatedly read commands and
         // execute them until the game is over.
 
@@ -63,8 +65,8 @@ public class Game
     private void printWelcome()
     {
         System.out.println();
-        System.out.println("Welcome to the World of Zuul!");
-        System.out.println("World of Zuul is a new, incredibly boring adventure game.");
+        System.out.println("Welcome to <Insert Name here>!");
+        System.out.println("<Insert Name Here> is an incredibly <Placeholder> text adventure game!");
         System.out.println("Type 'help' if you need help.");
         System.out.println();
         System.out.println(currentRoom.getDescription());
@@ -77,7 +79,6 @@ public class Game
      */
     private boolean processCommand(Command command) 
     {
-        CommandProcessor processor;
         boolean wantToQuit = false;
 
         CommandWord commandWord = command.getCommandWord();
@@ -96,8 +97,7 @@ public class Game
                 break;
                 
             default:
-                processor = new CommandProcessor(command, currentRoom, player);
-                processor.processCommand();
+                processor.processCommand(command);
                 break;
         }
         return wantToQuit;

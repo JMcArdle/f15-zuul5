@@ -48,7 +48,7 @@ public class Parser
         inputLine = reader.nextLine();
         inputLine = inputLine.trim();
 
-        // Find up to two words on the line.
+        // Find up to fill the command.
         Scanner tokenizer = new Scanner(inputLine);
         if(tokenizer.hasNext())
         {
@@ -64,7 +64,7 @@ public class Parser
                         word4 = tokenizer.next();
                         if(tokenizer.hasNext())
                         {
-                            word5 = tokenizer.next();      // get second word
+                            word5 = tokenizer.next();
                         }
                     }
                 }
@@ -73,12 +73,4 @@ public class Parser
 
         return new Command(commands.getCommandWord(word1), word2, word3, word4, word5);
     }
-
-//     /**
-//      * Print out a list of valid command words.
-//      */
-//     public void showCommands()
-//     {
-//         commands.showAll();
-//     }
 }
