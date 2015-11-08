@@ -174,8 +174,8 @@ public class CommandProcessor
         {
             currentRoom = nextRoom;
             output = currentRoom.getDescription();
-            StringTokenizer description = new StringTokenizer(output, "|");
-            System.out.println(description.nextToken());
+            if(!printOutput())
+                System.out.println("You enter the room.");
         }
     }
     
@@ -231,9 +231,8 @@ public class CommandProcessor
                         System.out.println("Debug: looking at something broke. Fix it.");
                         break;
                 }
-                StringTokenizer look = new StringTokenizer(output, "|");
-                if(look.hasMoreTokens())
-                    System.out.println(look.nextToken());
+                if(!printOutput())
+                    System.out.println("Doesn't look interesting.");
             }
         }
     }
@@ -308,5 +307,18 @@ public class CommandProcessor
         }
         return npcOrItem;
     }
-        
+    
+    private boolean printOutput()
+    {
+        StringTokenizer toPrint = new StringTokenizer(output, "|");
+        if(toPrint.hasMoreTokens())
+        {
+            System.out.println(toPrint.nextToken());
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
 }

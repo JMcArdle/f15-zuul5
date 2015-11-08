@@ -7,7 +7,7 @@ import java.util.ArrayList;
  *  This class resolves strings into objects
  * 
  * @author Scott Taylor 
- * @version 11/6/2015
+ * @version 11/8/2015
  */
 public class NameResolver
 {

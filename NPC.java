@@ -9,7 +9,7 @@ import java.util.Random;
  *  in the game and their reactions to all applicable commands
  * 
  * @author Scott Taylor
- * @version 11/2/2015
+ * @version 11/8/2015
  */
 public class NPC
 {
