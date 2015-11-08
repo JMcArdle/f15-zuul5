@@ -323,12 +323,14 @@ public class InternalCommandProcessor
     
     private void goAddItem()
     {
-        if(command.countTokens() == 11)
+        if(command.countTokens() == 13)
         {
             String name = command.nextToken();
             String look = command.nextToken();
             String attack = command.nextToken();
             String lick = command.nextToken();
+            String eat = command.nextToken();
+            String drink = command.nextToken();
             String listen = command.nextToken();
             String dodge = command.nextToken();
             String grab = command.nextToken();
@@ -344,7 +346,7 @@ public class InternalCommandProcessor
             goTo = resolver.resolveRoom(room);
             if (goTo != null)
             {
-                goTo.addItem(new Item(name,look,attack,lick,listen,dodge,grab, use, equipable));
+                goTo.addItem(new Item(name,look,attack,lick,eat,drink,listen,dodge,grab, use, equipable));
             }
             else
             {
@@ -499,6 +501,12 @@ public class InternalCommandProcessor
                         break;
                     case "lick":
                         targetItem.setLick(arg3);
+                        break;
+                    case "eat":
+                        targetItem.setEat(arg3);
+                        break;
+                    case "drink":
+                        targetItem.setDrink(arg3);
                         break;
                     case "listen":
                         targetItem.setListen(arg3);

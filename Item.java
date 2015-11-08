@@ -15,6 +15,8 @@ public class Item
     private String look;
     private String attack;
     private String lick;
+    private String eat;
+    private String drink;
     private String listen;
     private String dodge;
     private String grab;
@@ -33,14 +35,18 @@ public class Item
      * @param when you listen to them
      * @param when you dodge them
      * @param when you grab them
+     * @param when you use them
+     * @param if you can equip them
      */
-    public Item(String name, String look, String attack, String lick,
+    public Item(String name, String look, String attack, String lick, String eat, String drink,
             String listen, String dodge, String grab, String use, boolean equipable)
     {
         this.name = name;
         this.look = look;
         this.attack = attack;
         this.lick = lick;
+        this.eat = eat;
+        this.drink = drink;
         this.listen = listen;
         this.dodge = dodge;
         this.grab = grab;
@@ -94,6 +100,28 @@ public class Item
     public void setLick(String set)
     {
         lick = set;
+    }
+    
+    /**
+     * Sets their eat reponse
+     * 
+     * @param set attribute to set it to
+     * 
+     */
+    public void setEat(String set)
+    {
+        eat = set;
+    }
+    
+    /**
+     * Sets their drink reponse
+     * 
+     * @param set attribute to set it to
+     * 
+     */
+    public void setDrink(String set)
+    {
+        drink = set;
     }
     
     /**
@@ -198,6 +226,27 @@ public class Item
         return lick;
     }
     
+    /**
+     * Gets their eat response
+     * 
+     * @return String the String to return
+     * 
+     */
+    public String getEat()
+    {
+        return eat;
+    }
+    
+    /**
+     * Gets their drink response
+     * 
+     * @return String the String to return
+     * 
+     */
+    public String getDrink()
+    {
+        return drink;
+    }
     
     /**
      * Gets their listen response
