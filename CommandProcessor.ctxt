@@ -1,5 +1,5 @@
 #BlueJ class context
-comment0.params=room\ player\ allRooms
+comment0.params=currentRoom\ player\ allRooms
 comment0.target=CommandProcessor(Room,\ Player,\ java.util.ArrayList)
 comment1.params=command
 comment1.target=void\ processCommand(Command)
@@ -35,8 +35,8 @@ comment22.params=
 comment22.target=void\ goDrop()
 comment23.params=
 comment23.target=void\ goInventory()
-comment24.params=
-comment24.target=void\ executeInternalCommands()
+comment24.params=target
+comment24.target=int\ isNPCOrItem(java.lang.String)
 comment3.params=
 comment3.target=void\ goLook()
 comment3.text=\r\n\ Look\ at\ something\ to\ get\ more\ information\r\n

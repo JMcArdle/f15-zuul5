@@ -9,7 +9,7 @@ import java.util.ArrayList;
  * descriptions when their various interactions are called by the player
  * 
  * @author Scott Taylor
- * @version 11/6/2015
+ * @version 11/8/2015
  */
 public class InternalCommandProcessor
 {
@@ -136,10 +136,6 @@ public class InternalCommandProcessor
             System.out.println("Debug: the move npc command didn't have enough words, needs at least 3 (command npc room)");
         }
     }
-    
-    
-    
-    /////The methods I still need to finish//////
     
     private void goMoveItem()
     {

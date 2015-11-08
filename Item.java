@@ -6,7 +6,7 @@
  *  Contains all of the information of all items in the game.
  * 
  * @author Scott Taylor
- * @version (a version number or a date)
+ * @version 11/8/2015
  */
 public class Item
 {

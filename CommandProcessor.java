@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.StringTokenizer;
 
 /**
  * This class is part of _____, a text based adventure game created
@@ -7,11 +8,12 @@ import java.util.ArrayList;
  *  This is the main command processor for the game.
  * 
  * @author Scott Taylor
- * @version 11/4/2015
+ * @version 11/8/2015
  */
 public class CommandProcessor
 {
     private Command command;
+    private NameResolver resolver;
     private Room currentRoom;
     private Player player;
     private ArrayList<Room> allRooms;
@@ -21,15 +23,18 @@ public class CommandProcessor
     private String word5;
     private int words;
     
-    private InternalCommandProcessor internalProcessor;
-    private String internalCommands;
+    boolean runInternalCommands;
+    String output;
     
-    public CommandProcessor(Room room, Player player, ArrayList<Room> allRooms)
+    private InternalCommandProcessor internalProcessor;
+    
+    public CommandProcessor(Room currentRoom, Player player, ArrayList<Room> allRooms)
     {
-        this.currentRoom = room;
-        this.player = player;
-        this.allRooms = allRooms;
-       internalProcessor = new InternalCommandProcessor(room, player, allRooms);
+       this.currentRoom = currentRoom;
+       this.player = player;
+       this.allRooms = allRooms;
+       internalProcessor = new InternalCommandProcessor(currentRoom, player, allRooms);
+       resolver = new NameResolver(currentRoom, player, allRooms);
     }
     
     /**
@@ -45,6 +50,7 @@ public class CommandProcessor
         word4 = command.getFourthWord();
         word5 = command.getFifthWord();
         words = command.numberOfWords();
+        runInternalCommands = true;
 
         switch (commandWord) {
             case GO:
@@ -112,11 +118,18 @@ public class CommandProcessor
                 break;
             case INVENTORY:
                 goInventory();
+                runInternalCommands = false;
                 break;
             default:
+                runInternalCommands = false;
                 System.out.println("Debug: Something went wrong.\n\nThe command "+
                 "used wasn't unknown, but it wasn't known either. This Really shouldn't ever print "+
                 "so if it does, something really went terribly, terribly wrong.");
+                break;
+        }
+        if (runInternalCommands)
+        {
+            internalProcessor.execute(output);
         }
     }
 
@@ -129,9 +142,10 @@ public class CommandProcessor
      */
     private void goGo() 
     {
-        if(command.numberOfWords() < 2) {
+        if(words < 2) {
             // if there is no second word, we don't know where to go...
             System.out.println("Go where?");
+            runInternalCommands = false;
             return;
         }
 
@@ -154,11 +168,14 @@ public class CommandProcessor
         if (nextRoom == null)
         {
             System.out.println("You can\'t go that way.");
+            runInternalCommands = false;
         }
         else
         {
             currentRoom = nextRoom;
-            System.out.println(currentRoom.getDescription());
+            output = currentRoom.getDescription();
+            StringTokenizer description = new StringTokenizer(output, "|");
+            System.out.println(description.nextToken());
         }
     }
     
@@ -167,24 +184,69 @@ public class CommandProcessor
      */
     private void goLook()
     {
-        
-        if(word2.equalsIgnoreCase("around"))
+        if (words >= 2)
         {
-            ///print out the extra description info
-    
-    
-    
-            
-            
+            int npcOrItem = 0;
+            String target;
+            if(word2.equalsIgnoreCase("around"))
+            {
+                output = (currentRoom.getExtraDescription());
+                StringTokenizer description = new StringTokenizer(output, "|");
+                if (description.hasMoreTokens())
+                {
+                    System.out.println(description.nextToken());
+                }
+                else
+                {
+                    System.out.println("You see nothing of importance.");
+                    runInternalCommands = false;
+                }
+            }
+            else
+            {   
+                if(word2.equalsIgnoreCase("at"))
+                {
+                    target = word3;
+                }
+                else
+                {
+                    target = word2;
+                }
+                npcOrItem = isNPCOrItem(target);
+                switch(npcOrItem)
+                {
+                    case 0:
+                        System.out.println("Can't find what you want to look at.");
+                        runInternalCommands = false;
+                        break;
+                    case 1:
+                        output = resolver.resolveNPCFromCurrentRoom(target).getLook();
+                    case 2:
+                        output = resolver.resolveItemFromCurrentRoom(target).getLook();
+                    case 3:
+                        output = resolver.resolveItemFromInventory(target).getLook();
+                    case 4:
+                        output = resolver.resolveItemFromEquip(target).getLook();
+                    default:
+                        System.out.println("Debug: looking at something broke. Fix it.");
+                        break;
+                }
+                StringTokenizer look = new StringTokenizer(output, "|");
+                if(look.hasMoreTokens())
+                    System.out.println(look.nextToken());
+            }
         }
     }
+
     
     
     
     
     /////All the other methods I haven't finished/////
     private void goTalk()
-    {}
+    {
+        
+    }
     private void goAttack()
     {}
     private void goSense()
@@ -224,10 +286,27 @@ public class CommandProcessor
     private void goInventory()
     {}
         
-        
-    private void executeInternalCommands()
+    private int isNPCOrItem(String target)
     {
-        internalProcessor.execute(internalCommands);
+        int npcOrItem = 0;
+        if(resolver.resolveNPCFromCurrentRoom(target) != null)
+            npcOrItem = 1;
+        if (npcOrItem == 0)
+        {
+            if(resolver.resolveItemFromCurrentRoom(target) != null)
+                npcOrItem = 2;
+        }
+        if (npcOrItem == 0)
+        {
+            if(resolver.resolveItemFromInventory(target) != null)
+                npcOrItem = 3;
+        }
+        if (npcOrItem == 0)
+        {
+            if(resolver.resolveItemFromEquip(target) != null)
+                npcOrItem = 4;
+        }
+        return npcOrItem;
     }
         
 }

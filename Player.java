@@ -6,7 +6,7 @@ import java.util.ArrayList;
  * This is the player object that holds their item and equipment
  * 
  * @author Scott Taylor
- * @version 11/4/2015
+ * @version 11/8/2015
  */
 public class Player
 {
