@@ -52,7 +52,7 @@ public class InternalCommandProcessor
             command = new StringTokenizer(tokens.nextToken());
             if (command.hasMoreTokens())
             {
-                switch(command.nextToken())
+                switch(command.nextToken().trim().toLowerCase())
                 {
                     case "-mplayer":
                         goMovePlayer();
@@ -69,16 +69,22 @@ public class InternalCommandProcessor
                     case "-rnpc":
                         goRemoveNPC();
                         break;
-                    case "-npcatalk":
+                    case "-anpctalk":
                         goAddNPCTalk();
                         break;
-                    case "-npcrtalk":
+                    case "-rnpctalk":
                         goRemoveNPCTalk();
                     case "-aitem":
                         goAddItem();
                         break;
                     case "-ritem":
                         goRemoveItem();
+                        break;
+                    case "-modnpc":
+                        goModifyNPC();
+                        break;
+                    case "-moditem":
+                        goModifyItem();
                         break;
                     case "-ainv":
                         goAddInventory();
@@ -441,6 +447,121 @@ public class InternalCommandProcessor
         else
         {
             System.out.println("Debug: the remove item command didn't have enough words, needs at least 3 (command item room)");
+        }
+    }
+    
+    private void goModifyNPC()
+    {
+        if(command.countTokens() >= 4)
+        {
+            String arg1 = command.nextToken();
+            String arg2 = command.nextToken();
+                        String arg3 = command.nextToken("\"");          /////////////This is going to need testing!!!//////////////////////////
+            NPC targetNPC = resolver.resolveNPCFromCurrentRoom(arg1);
+            if(targetNPC == null)
+            {
+                targetNPC = resolver.resolveNPCFromGlobal(arg1);
+            }
+            if(targetNPC != null)
+            {
+                switch(arg2.trim().toLowerCase())
+                {
+                    case "name":
+                        targetNPC.setName(arg3);
+                        break;
+                    case "look":
+                        targetNPC.setLook(arg3);
+                        break;
+                    case "attack":
+                        targetNPC.setAttack(arg3);
+                        break;
+                    case "leer":
+                        targetNPC.setLeer(arg3);
+                        break;
+                    case "lick":
+                        targetNPC.setLick(arg3);
+                        break;
+                    case "torture":
+                        targetNPC.setTorture(arg3);
+                        break;
+                    case "escape":
+                        targetNPC.setEscape(arg3);
+                        break;
+                    case "listen":
+                        targetNPC.setListen(arg3);
+                        break;
+                    case "dodge":
+                        targetNPC.setDodge(arg3);
+                        break;
+                    case "grab":
+                        targetNPC.setGrab(arg3);
+                        break;
+                    default:
+                        System.out.println("Debug: modify npc recieved a field to modify that isn't doesn't exist");
+                        break;
+                }
+            }
+            else
+            {
+                System.out.println("Debug: could not find the npc");
+            }
+        }
+        else
+        {
+            System.out.println("Debug: the modifyNPC command didn't have enough words, needs at least 4 (command npc modify newValue)");
+        }
+    }
+    
+    private void goModifyItem()
+    {
+        if(command.countTokens() >= 4)
+        {
+            String arg1 = command.nextToken();
+            String arg2 = command.nextToken();
+                        String arg3 = command.nextToken("\"");          /////////////This is going to need testing!!!//////////////////////////
+            Item targetItem = resolver.resolveItemFromCurrentRoom(arg1);
+            if(targetItem == null)
+            {
+                targetItem = resolver.resolveItemFromGlobal(arg1);
+            }
+            if(targetItem != null)
+            {
+                switch(arg2.trim().toLowerCase())
+                {
+                    case "name":
+                        targetItem.setName(arg3);
+                        break;
+                    case "look":
+                        targetItem.setLook(arg3);
+                        break;
+                    case "attack":
+                        targetItem.setAttack(arg3);
+                        break;
+                    case "lick":
+                        targetItem.setLick(arg3);
+                        break;
+                    case "listen":
+                        targetItem.setListen(arg3);
+                        break;
+                    case "dodge":
+                        targetItem.setDodge(arg3);
+                        break;
+                    case "grab":
+                        targetItem.setGrab(arg3);
+                        break;
+                    default:
+                        System.out.println("Debug: modify item recieved a field to modify that isn't doesn't exist");
+                        break;
+                }
+            }
+            else
+            {
+                System.out.println("Debug: could not find the item");
+            }
+        }
+        else
+        {
+            System.out.println("Debug: the modifyItem command didn't have enough words, needs at least 4 (command npc modify newValue)");
         }
     }
     private void goAddInventory()
