@@ -99,6 +99,19 @@ public class NameResolver
     }
     
     /**
+     * finds item if it's equipped
+     */
+    public Item resolveItemFromEquip(String target)
+    {
+        Item found = null;
+        if(player.getEquipped().getName().equalsIgnoreCase(target))
+        {
+            found = player.getEquipped();
+        }
+        return found;
+    }
+    
+    /**
      * finds an item in the room based on name
      */
     public Item resolveItemFromCurrentRoom(String target)

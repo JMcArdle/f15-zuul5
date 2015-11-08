@@ -52,60 +52,7 @@ public class InternalCommandProcessor
             command = new StringTokenizer(tokens.nextToken());
             if (command.hasMoreTokens())
             {
-                switch(command.nextToken().trim().toLowerCase())
-                {
-                    case "-mplayer":
-                        goMovePlayer();
-                        break;
-                    case "-mnpc":
-                        goMoveNPC();
-                        break;
-                    case "-mitem":
-                        goMoveItem();
-                        break;
-                    case "-anpc":
-                        goAddNPC();
-                        break;
-                    case "-rnpc":
-                        goRemoveNPC();
-                        break;
-                    case "-anpctalk":
-                        goAddNPCTalk();
-                        break;
-                    case "-rnpctalk":
-                        goRemoveNPCTalk();
-                    case "-aitem":
-                        goAddItem();
-                        break;
-                    case "-ritem":
-                        goRemoveItem();
-                        break;
-                    case "-modnpc":
-                        goModifyNPC();
-                        break;
-                    case "-moditem":
-                        goModifyItem();
-                        break;
-                    case "-ainv":
-                        goAddInventory();
-                        break;
-                    case "-rinv":
-                        goRemoveInventory();
-                        break;
-                    case "-equip":
-                        goEquip();
-                        break;
-                    case "-drop":
-                        goDrop();
-                        break;
-                    case "-use":
-                        goUse();
-                        break;
-                    default:
-                    System.out.println("Debug: you tried to call an internal command that isn't in "+
-                    "the list of available internal commands. Try checking your spelling.\n"+
-                    "Also, remove any leading whitespace characters.");
-                }
+                switchCommands();
             }
         }
     }
@@ -324,6 +271,10 @@ public class InternalCommandProcessor
         {
             String arg1 = command.nextToken();
             String arg2 = command.nextToken();
+            while (command.hasMoreTokens())
+            {
+                arg2 = arg2 + " " + command.nextToken();
+            }
             NPC targetNPC = resolver.resolveNPCFromCurrentRoom(arg1);
             if(targetNPC == null)
             {
@@ -350,6 +301,10 @@ public class InternalCommandProcessor
         {
             String arg1 = command.nextToken();
             String arg2 = command.nextToken();
+            while (command.hasMoreTokens())
+            {
+                arg2 = arg2 + " " + command.nextToken();
+            }
             NPC targetNPC = resolver.resolveNPCFromCurrentRoom(arg1);
             if(targetNPC == null)
             {
@@ -366,13 +321,13 @@ public class InternalCommandProcessor
         }
         else
         {
-            System.out.println("Debug remove npc talk needs 3 words (command npc words)");
+            System.out.println("Debug remove npc talk needs 3 words (command npc words without quotes)");
         }
     }
     
     private void goAddItem()
     {
-        if(command.countTokens() == 10)
+        if(command.countTokens() == 11)
         {
             String name = command.nextToken();
             String look = command.nextToken();
@@ -381,6 +336,7 @@ public class InternalCommandProcessor
             String listen = command.nextToken();
             String dodge = command.nextToken();
             String grab = command.nextToken();
+            String use = command.nextToken();
             String eq = command.nextToken();
             boolean equipable = false;
             String room = command.nextToken();
@@ -392,7 +348,7 @@ public class InternalCommandProcessor
             goTo = resolver.resolveRoom(room);
             if (goTo != null)
             {
-                goTo.addItem(new Item(name,look,attack,lick,listen,dodge,grab, equipable));
+                goTo.addItem(new Item(name,look,attack,lick,listen,dodge,grab, use, equipable));
             }
             else
             {
@@ -456,7 +412,11 @@ public class InternalCommandProcessor
         {
             String arg1 = command.nextToken();
             String arg2 = command.nextToken();
-                        String arg3 = command.nextToken("\"");          /////////////This is going to need testing!!!//////////////////////////
+            String arg3 = command.nextToken();
+            while (command.hasMoreTokens())
+            {
+                arg3 = arg3 + " " + command.nextToken();
+            }
             NPC targetNPC = resolver.resolveNPCFromCurrentRoom(arg1);
             if(targetNPC == null)
             {
@@ -518,7 +478,11 @@ public class InternalCommandProcessor
         {
             String arg1 = command.nextToken();
             String arg2 = command.nextToken();
-                        String arg3 = command.nextToken("\"");          /////////////This is going to need testing!!!//////////////////////////
+            String arg3 = command.nextToken();
+            while(command.hasMoreTokens())
+            {
+                arg3 = arg3 + " " + command.nextToken();
+            }
             Item targetItem = resolver.resolveItemFromCurrentRoom(arg1);
             if(targetItem == null)
             {
@@ -561,20 +525,273 @@ public class InternalCommandProcessor
         }
         else
         {
-            System.out.println("Debug: the modifyItem command didn't have enough words, needs at least 4 (command npc modify newValue)");
+            System.out.println("Debug: the modifyItem command didn't have enough words, needs at least 4 (command npc modify new value no quotes)");
         }
     }
+    
     private void goAddInventory()
-    {}
+    {
+        if(command.countTokens() >= 2)
+        {
+            String item = command.nextToken();
+            Item itemToAdd = resolver.resolveItemFromCurrentRoom(item);
+            if(itemToAdd == null)
+            {
+                itemToAdd = resolver.resolveItemFromGlobal(item);
+            }
+            if(itemToAdd != null)
+            {
+                Room from = null;
+                from = resolver.findItem(item);
+                if (from != null)
+                {
+                    player.addToInventory(itemToAdd);
+                    from.removeItem(itemToAdd);
+                }
+                System.out.println("Debug: the item was found when the name was resolved, but then couldn't find the room it was in "+
+                "somehow...\n\nI really hope this never prints out because it means I royally screwed something up.");
+            }
+            else
+            {
+                System.out.println("Debug: that item couldn't be found.");
+            }
+        }
+        else
+        {
+            System.out.println("Debug: the add Inventory command didn't have enough words, needs at least 2 (command item)");
+        }
+    }
+    
     private void goRemoveInventory()
-    {}
+    {
+        if(command.countTokens() >= 2)
+        {
+            String item = command.nextToken();
+            Item itemToRemove = resolver.resolveItemFromInventory(item);
+            if(itemToRemove != null)
+            {
+                player.removeFromInventory(itemToRemove);
+            }
+            else
+            {
+                System.out.println("Couldn't find the item to remove from the player's inventory.");
+            }
+        }
+        else
+        {
+            System.out.println("Debug: the remove Inventory command didn't have enough words, needs at least 2 (command item)");
+        }
+    }
+    
     private void goEquip()
-    {}
+    {
+        if(command.countTokens() >= 2)
+        {
+            String item = command.nextToken();
+            Item itemToEquip = resolver.resolveItemFromInventory(item);
+            if(itemToEquip != null)
+            {
+                player.equip(itemToEquip);
+            }
+            else
+            {
+                System.out.println("Debug: couldn't find the item to equip in the player's inventory.");
+            }
+        }
+        else
+        {
+            System.out.println("Debug: the equip command didn't have enough words, needs at least 2 (command item)");
+        }
+    }
+    
     private void goDrop()
-    {}
-    private void goUse()
-    {}
+    {
+        if(command.countTokens() >= 2)
+        {
+            String item = command.nextToken();
+            Item itemToDrop = resolver.resolveItemFromInventory(item);
+            if(itemToDrop != null)
+            {
+                player.removeFromInventory(itemToDrop);
+                currentRoom.addItem(itemToDrop);
+            }
+            else
+            {
+                System.out.println("Debug: couldn't find the item to drop in the player's inventory.");
+            }
+        }
+        else
+        {
+            System.out.println("Debug: the remove Inventory command didn't have enough words, needs at least 2 (command item)");
+        }
+    }
     
-
+//     Not sure if this fits in the internal commands, will see later//
+//         private void goUse()
+//         {
+//             if(command.countTokens() >= 2)
+//             {
+//                 String item = command.nextToken();
+//                 Item itemToUse = resolver.resolveItemFromInventory(item);
+//                 if(itemToUse != null)
+//                 {
+//                     player.use(itemToUse);
+//                 }
+//                 else
+//                 {
+//                     System.out.println("Debug: couldn't find the item to drop in the player's inventory.");
+//                 }
+//             }
+//             else
+//             {
+//                 System.out.println("Debug: the use command didn't have enough words, needs at least 2 (command item)");
+//             }
+//         }
     
+    private void goCheckInventory()
+    {
+        if(command.countTokens() >= 4)
+        {
+            if(command.hasMoreTokens())
+            {
+                String item = command.nextToken();
+                Item itemToCheck = resolver.resolveItemFromInventory(item);
+                if(itemToCheck == null)
+                {
+                    itemToCheck = resolver.resolveItemFromEquip(item);
+                }
+                if(itemToCheck != null)
+                {
+                    if (command.hasMoreTokens())
+                    {
+                        removeReadTokens();
+                        switchCommands();
+                    }
+                    else
+                    {
+                        System.out.println("Ran out of tokens when looking for the command to use");
+                    }
+                }
+                else
+                {
+                    //didn't find item, don't do anything
+                }
+            }
+            System.out.println("Ran out of tokens when looking for the item to look for");
+        }
+        else
+        {
+            System.out.println("Debug: the check Inventory command didn't have enough words, needs at least 4 (command item command xxx)");
+        }
+    }
+    
+    private void goCheckEquip()
+    {
+        if(command.countTokens() >= 4)
+        {
+            if(command.hasMoreTokens())
+            {
+                String item = command.nextToken();
+                Item itemToCheck = resolver.resolveItemFromEquip(item);
+                if(itemToCheck == null)
+                {
+                    itemToCheck = resolver.resolveItemFromEquip(item);
+                }
+                if(itemToCheck != null)
+                {
+                    if (command.hasMoreTokens())
+                    {
+                        removeReadTokens();
+                        switchCommands();
+                    }
+                    else
+                    {
+                        System.out.println("Ran out of tokens when looking for the command to use");
+                    }
+                }
+                else
+                {
+                    //didn't find item, don't do anything
+                }
+            }
+            System.out.println("Ran out of tokens when looking for the item to look for");
+        }
+        else
+        {
+            System.out.println("Debug: the check equip command didn't have enough words, needs at least 4 (command item command xxx)");
+        }
+    }
+    
+    private void removeReadTokens()
+    {
+        String newCommand = null;
+        while(command.hasMoreTokens())
+        {
+            newCommand = newCommand + " " + command.nextToken();
+        }
+        command = new StringTokenizer(newCommand);
+    }
+    
+    private void switchCommands()
+    {
+        switch(command.nextToken().trim().toLowerCase())
+        {
+            case "-mplayer":
+                goMovePlayer();
+                break;
+            case "-mnpc":
+                goMoveNPC();
+                break;
+            case "-mitem":
+                goMoveItem();
+                break;
+            case "-anpc":
+                goAddNPC();
+                break;
+            case "-rnpc":
+                goRemoveNPC();
+                break;
+            case "-anpctalk":
+                goAddNPCTalk();
+                break;
+            case "-rnpctalk":
+                goRemoveNPCTalk();
+            case "-aitem":
+                goAddItem();
+                break;
+            case "-ritem":
+                goRemoveItem();
+                break;
+            case "-modnpc":
+                goModifyNPC();
+                break;
+            case "-moditem":
+                goModifyItem();
+                break;
+            case "-ainv":
+                goAddInventory();
+                break;
+            case "-rinv":
+                goRemoveInventory();
+                break;
+            case "-equip":
+                goEquip();
+                break;
+            case "-drop":
+                goDrop();
+                break;
+//             case "-use":
+//                 goUse();
+//                 break;
+            case "-checkinv":
+                goCheckInventory();
+                break;
+            case "-checkeq":
+                goCheckEquip();
+                break;
+            default:
+            System.out.println("Debug: you tried to call an internal command that isn't in "+
+            "the list of available internal commands. Try checking your spelling.\n");
+        }
+    }
 }

@@ -18,6 +18,7 @@ public class Item
     private String listen;
     private String dodge;
     private String grab;
+    private String use;
     private boolean equipable;
     
     ///Constructor///
@@ -34,7 +35,7 @@ public class Item
      * @param when you grab them
      */
     public Item(String name, String look, String attack, String lick,
-            String listen, String dodge, String grab, boolean equipable)
+            String listen, String dodge, String grab, String use, boolean equipable)
     {
         this.name = name;
         this.look = look;
@@ -43,6 +44,7 @@ public class Item
         this.listen = listen;
         this.dodge = dodge;
         this.grab = grab;
+        this.use = use;
         this.equipable = equipable;
     }
     
@@ -128,6 +130,16 @@ public class Item
     }
     
     /**
+     * Sets their use response
+     * 
+     * @param set attribute to set it to
+     */
+    public void setUse(String set)
+    {
+        use = set;
+    }
+    
+    /**
      * if it can be equipped
      * 
      * @param set attribute to set it to
@@ -193,7 +205,7 @@ public class Item
      * @return String the String to return
      * 
      */
-    public String getLiten()
+    public String getListen()
     {
         return listen;
     }
@@ -219,6 +231,17 @@ public class Item
     public String getGrab()
     {
         return grab;
+    }
+    
+    /**
+     * gets the use response
+     * 
+     * @return String the String to return
+     * 
+     */
+    public String getUse()
+    {
+        return use;
     }
     
     /**

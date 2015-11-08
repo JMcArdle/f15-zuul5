@@ -77,6 +77,7 @@ public class Player
             return false;
         }
     }
+        
     
     /**
      * takes item away from player
@@ -141,6 +142,31 @@ public class Player
         {
             return null;
         }
+    }
+    
+    /**
+     * returns player's equipped item
+     * 
+     * @return Item player's equipped item
+     */
+    public Item getEquipped()
+    {
+        return equipped;
+    }
+    
+    /**
+     * Uses an item
+     * 
+     * @param toUse the item to use
+     */
+    public String use(Item toUse)
+    {
+        String response = null;
+        if(has(toUse) > 0)
+        {
+            response = toUse.getUse();
+        }
+        return response;
     }
     
     /**
