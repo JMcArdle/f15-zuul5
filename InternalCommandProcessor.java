@@ -633,7 +633,20 @@ public class InternalCommandProcessor
     
     private void goPhase1()
     {
-        resolver.resolveRoom("inn").setExtraDescription("Stuff");
+        resolver.resolveRoom("citygate").setDescription("You are at the city gate.  There is a blood trail leading outside the city.");
+        resolver.resolveRoom("citygate").setExtraDescription("The blood trail consists of tiny footprints.");
+        resolver.resolveRoom("outsidethewatermill").setDescription("You are outside the water mill.  Even though the mill is shut down, the door is wide open.");
+        resolver.resolveRoom("outsidethewatermill").setExtraDescription("Looking through the doorway, you can see a something lying on the floor.");
+        resolver.resolveRoom("insidethewatermill").setDescription("You are inside the water mill.  There are 2 city guards lying on the floor.");
+        resolver.resolveRoom("insidethewatermill").addItem(new Item("guards", "Upon further inspection, you confirm that both the guards are dead, the result of many tiny puncture wounds on their chest.  There is also a blood trailer leading out the door.  The blood trail has what looks like a child’s footprint inside it.", null, null, null, null, null, null, null, null, null, false));
+        resolver.resolveRoom("insidethewatermill").setExtraDescription("There is nothing else except the bodies here.");
+        resolver.resolveRoom("topoftheguardtower").setExtraDescription("It looks like there's some commotion at the city gates, northeast of here.");
+        resolver.resolveRoom("cropfields").setExtraDescription("The blood trail is leading you north towards the forest.");
+        resolver.resolveRoom("forest").setDescription("You are in the forest outside the city.  Following the blood trail, you find 2 gnomes attempting to crawl under a hollowed out tree.");
+        resolver.resolveRoom("forest").setExtraDescription("The gnomes are both about a foot tall.  One of them is bleeding from his leg, from what looks like a knife wound. The other gnome is holding a small bottle in his hands filled with some kind of low pulsating blue light. They have noticed your presence and they both leap at you.");
+        resolver.resolveRoom("forest").addNPC(new NPC("gnomes", "They're angry gnomes!", "You knock both gnomes our out of the air with two well timed punches.  Since they are so small your punches seem to have killed them. The second gnome drops the bottle onto the ground.|", "They leer back.", "Yuck!", "More more!",
+                "You flee!|-mplayer cropfields", null, "You can't dodge both.", "You grab the first gnome out of the air and slam him into the ground, killing him.  The second gnome sails over your head and retreats into the hollowed out tree.  It looks like you should be able to crawl through to get inside."));
+        
     }
     
     private void goPhase2()

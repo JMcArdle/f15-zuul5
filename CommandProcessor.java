@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.StringTokenizer;
+import java.util.Random;
 
 /**
  * This class is part of _____, a text based adventure game created
@@ -528,7 +529,17 @@ public class CommandProcessor
     
     private void goRun()
     {
-        //What goes here?
+        System.out.println("You flee the area!");
+        
+        Random rng = new Random();
+        int goTo = rng.nextInt(currentRoom.exits.size());
+        currentRoom = currentRoom.extis.get(goTo);
+        output = currentRoom.getDescription();
+        if(!printOutput())
+        {
+            System.out.println("You enter the room.");
+            runInternalCommands = false;
+        }
     }
     
     private void goCrawl()
