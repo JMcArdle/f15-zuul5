@@ -9,14 +9,28 @@ import java.util.ArrayList;
  * @author Scott Taylor
  * @version 10/28/2015
  */
-public class RoomCreator
+public class WorldSetup
 {
     private ArrayList<Room> allRooms;
 
     /**
      * Constructor for objects of class RoomCreator
      */
-    public RoomCreator()
+    public WorldSetup()
+    {
+    }
+    
+    /**
+     * creates all the npcs
+     */
+    public void createNPCS()
+    {
+    }
+    
+    /**
+     * create all the items
+     */
+    public void createItems()
     {
     }
 
@@ -35,10 +49,18 @@ public class RoomCreator
         // initialise room exits like this
         outside.addExit("east", room2);
         
+        
+        
         //then add the rooms to the master list of all the rooms
         allRooms.add(outside);
         allRooms.add(room2);
         
+        
+        //add all items to their rooms here
+        //roomName.addItem(item);
+        
+        //all npcs to their rooms here
+        //roomName.addNPC(npc);
         
         //return whatever room they start in
         return outside;

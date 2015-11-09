@@ -17,7 +17,7 @@ public class Game
 {
     private Parser parser;
     private Room currentRoom;
-    private RoomCreator setUp;
+    private WorldSetup setUp;
     private Player player;
     private CommandProcessor processor;
 
@@ -26,7 +26,7 @@ public class Game
      */
     public Game() 
     {
-        setUp = new RoomCreator();
+        setUp = new WorldSetup();
         player = new Player();
         parser = new Parser();
     }

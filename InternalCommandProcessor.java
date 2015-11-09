@@ -323,7 +323,7 @@ public class InternalCommandProcessor
     
     private void goAddItem()
     {
-        if(command.countTokens() == 13)
+        if(command.countTokens() == 14)
         {
             String name = command.nextToken();
             String look = command.nextToken();
@@ -331,6 +331,7 @@ public class InternalCommandProcessor
             String lick = command.nextToken();
             String eat = command.nextToken();
             String drink = command.nextToken();
+            String crawl = command.nextToken();
             String listen = command.nextToken();
             String dodge = command.nextToken();
             String grab = command.nextToken();
@@ -346,7 +347,7 @@ public class InternalCommandProcessor
             goTo = resolver.resolveRoom(room);
             if (goTo != null)
             {
-                goTo.addItem(new Item(name,look,attack,lick,eat,drink,listen,dodge,grab, use, equipable));
+                goTo.addItem(new Item(name,look,attack,lick,eat,drink,crawl,listen,dodge,grab, use, equipable));
             }
             else
             {
@@ -630,6 +631,26 @@ public class InternalCommandProcessor
         }
     }
     
+    private void goPhase1()
+    {
+        resolver.resolveRoom("inn").setExtraDescription("Stuff");
+    }
+    
+    private void goPhase2()
+    {
+        //Make all the changes needed at phase change
+    }
+    
+    private void goPhase3()
+    {
+        //Make all the changes needed at phase change
+    }
+    
+    private void goPhase4()
+    {
+        //Make all the changes needed at phase change
+    }
+    
 //     Not sure if this fits in the internal commands, will see later//
 //         private void goUse()
 //         {
@@ -784,9 +805,19 @@ public class InternalCommandProcessor
             case "-drop":
                 goDrop();
                 break;
-//             case "-use":
-//                 goUse();
-//                 break;
+            case "-phase1":
+                goPhase1();
+                break;
+            case "-phase2":
+                goPhase2();
+                break;
+            case "-phase3":
+                goPhase3();
+                break;
+            case "-phase4":
+                goPhase4();
+                break;
+
             case "-checkinv":
                 goCheckInventory();
                 break;

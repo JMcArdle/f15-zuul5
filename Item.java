@@ -17,6 +17,7 @@ public class Item
     private String lick;
     private String eat;
     private String drink;
+    private String crawl;
     private String listen;
     private String dodge;
     private String grab;
@@ -31,7 +32,10 @@ public class Item
      * @param name their name
      * @param look when you look at them
      * @param attack when you attack them
-     * @param when you lick them
+     * @param lick when you lick them
+     * @param eat when you eat them
+     * @param drink when you drink them
+     * @param crawl when you crawl them
      * @param when you listen to them
      * @param when you dodge them
      * @param when you grab them
@@ -39,7 +43,7 @@ public class Item
      * @param if you can equip them
      */
     public Item(String name, String look, String attack, String lick, String eat, String drink,
-            String listen, String dodge, String grab, String use, boolean equipable)
+            String crawl, String listen, String dodge, String grab, String use, boolean equipable)
     {
         this.name = name;
         this.look = look;
@@ -47,6 +51,7 @@ public class Item
         this.lick = lick;
         this.eat = eat;
         this.drink = drink;
+        this.crawl = crawl;
         this.listen = listen;
         this.dodge = dodge;
         this.grab = grab;
@@ -122,6 +127,17 @@ public class Item
     public void setDrink(String set)
     {
         drink = set;
+    }
+    
+    /**
+     * Sets their crawl
+     * 
+     * @param set attribute to set it to
+     * 
+     */
+    public void setCrawl(String set)
+    {
+        crawl = set;
     }
     
     /**
@@ -246,6 +262,17 @@ public class Item
     public String getDrink()
     {
         return drink;
+    }
+    
+    /**
+     * Gets their crawl
+     * 
+     * @return String the String to return
+     * 
+     */
+    public String getCrawl()
+    {
+        return crawl;
     }
     
     /**

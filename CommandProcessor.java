@@ -533,7 +533,22 @@ public class CommandProcessor
     
     private void goCrawl()
     {
-        //What goes here?
+        String target;
+        if (word2.equalsIgnoreCase("in") || word2.equalsIgnoreCase("under"))
+        {
+            target = word3;
+        }
+        else
+        {
+            target = word2;
+        }
+        Item itemToCrawl = resolver.resolveItemFromCurrentRoom(target);
+        output = itemToCrawl.getCrawl();
+        if(!printOutput())
+        {
+            System.out.println("Can't crawl under that.");
+            runInternalCommands = false;
+        }
     }
     
     private void goTorture()
