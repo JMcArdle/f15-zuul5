@@ -23,6 +23,7 @@ public class Room
     ///fields///
     private String name;
     private String description;
+    private String extraDescription;
     private HashMap<String, Room> exits;        // stores exits of this room.
     private ArrayList<NPC> npcs;
     private ArrayList<Item> items;
@@ -31,15 +32,36 @@ public class Room
     ///constructor///
     
     /**
-     * Create a room described "description". Initially, it has
-     * no exits. "description" is something like "a kitchen" or
-     * "an open court yard".
+     * Create a new room
+     * 
+     * takes name, description
+     * 
      * @param description The room's description.
      */
     public Room(String name, String description) 
     {
         this.name = name;
         this.description = description;
+        extraDescription = "You see nothing of importance.";
+        exits = new HashMap<String, Room>();
+        npcs = new ArrayList<NPC>();
+        items = new ArrayList<Item>();
+    }
+    
+    /**
+     * Create a new room
+     * 
+     * takes name, description, and extradescription
+     * 
+     * @param the room name
+     * @param description The room's description.
+     * @param description2 The rooom's extraDescription
+     */
+    public Room(String name, String description, String description2) 
+    {
+        this.name = name;
+        this.description = description;
+        extraDescription = description2;
         exits = new HashMap<String, Room>();
         npcs = new ArrayList<NPC>();
         items = new ArrayList<Item>();
@@ -47,8 +69,36 @@ public class Room
     
     
     ///methods///
-
+    
     //setters//
+    
+    /**
+     * Change the name of the room
+     * @param name the new name
+     */
+    public void setName(String name)
+    {
+        this.name = name;
+    }
+        
+    /**
+     * Reset the description of the room
+     * @param descriptioin the new description
+     */
+    public void setDescription(String description)
+    {
+        this.description = description;
+    }
+    
+    /**
+     * Change the extra description when the player looks around
+     * @param description the extra text to put in
+     */
+    public void setExtraDescription(String description)
+    {
+        extraDescription = description;
+    }
+    
     /**
      * Define an exit from this room.
      * @param direction The direction of the exit.
@@ -105,7 +155,9 @@ public class Room
         items.remove(rem);
     }
     
+    
     //getters//
+    
     
     /**
      * returns the name of the room
@@ -125,6 +177,16 @@ public class Room
     public String getDescription()
     {
         return description;
+    }
+    
+    /**
+     * returns the extra desctiption of the room
+     * 
+     * @return the extra info when looking around
+     */
+    public String getExtraDescription()
+    {
+        return extraDescription;
     }
     
     /**
@@ -154,6 +216,28 @@ public class Room
     public Room getExit(String direction) 
     {
         return exits.get(direction);
+    }
+    
+    /**
+     * Return the map of exits
+     * 
+     * @param direction The exit's direction.
+     * @return The room in the given direction.
+     */
+    public HashMap<String, Room> getAllExits() 
+    {
+        return exits;
+    }
+    
+    /**
+     * Return the room that is reached if we go from this room in direction
+     * "direction". If there is no room in that direction, return null.
+     * @param direction The exit's direction.
+     * @return The room in the given direction.
+     */
+    public int getNumExits() 
+    {
+        return exits.size();
     }
     
     

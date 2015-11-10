@@ -24,8 +24,30 @@ public class CommandWords
     {
         validCommands = new HashMap<String, CommandWord>();
         validCommands.put("go", CommandWord.GO);
-        validCommands.put("help", CommandWord.HELP);
         validCommands.put("quit", CommandWord.QUIT);
+        validCommands.put("help", CommandWord.HELP);
+        validCommands.put("look", CommandWord.LOOK);
+        validCommands.put("talk", CommandWord.TALK);
+        validCommands.put("attack", CommandWord.ATTACK);
+        validCommands.put("sense", CommandWord.SENSE);
+        validCommands.put("use", CommandWord.USE);
+        validCommands.put("climb", CommandWord.CLIMB);
+        validCommands.put("jump", CommandWord.JUMP);
+        validCommands.put("leer", CommandWord.LEER);
+        validCommands.put("lick", CommandWord.LICK);
+        validCommands.put("eat", CommandWord.EAT);
+        validCommands.put("drink", CommandWord.DRINK);
+        validCommands.put("run", CommandWord.RUN);
+        validCommands.put("crawl", CommandWord.CRAWL);
+        validCommands.put("torture", CommandWord.TORTURE);
+        validCommands.put("escape", CommandWord.ESCAPE);
+        validCommands.put("listen", CommandWord.LISTEN);
+        validCommands.put("dodge", CommandWord.DODGE);
+        validCommands.put("equip", CommandWord.EQUIP);
+        validCommands.put("grab", CommandWord.GRAB);
+        validCommands.put("steal", CommandWord.STEAL);
+        validCommands.put("drop", CommandWord.DROP);
+        validCommands.put("inventory", CommandWord.INVENTORY);
     }
 
     /**

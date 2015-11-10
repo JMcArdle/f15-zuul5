@@ -6,7 +6,7 @@
  *  Contains all of the information of all items in the game.
  * 
  * @author Scott Taylor
- * @version (a version number or a date)
+ * @version 11/8/2015
  */
 public class Item
 {
@@ -15,9 +15,13 @@ public class Item
     private String look;
     private String attack;
     private String lick;
+    private String eat;
+    private String drink;
+    private String crawl;
     private String listen;
     private String dodge;
     private String grab;
+    private String use;
     private boolean equipable;
     
     ///Constructor///
@@ -28,21 +32,30 @@ public class Item
      * @param name their name
      * @param look when you look at them
      * @param attack when you attack them
-     * @param when you lick them
+     * @param lick when you lick them
+     * @param eat when you eat them
+     * @param drink when you drink them
+     * @param crawl when you crawl them
      * @param when you listen to them
      * @param when you dodge them
      * @param when you grab them
+     * @param when you use them
+     * @param if you can equip them
      */
-    public Item(String name, String look, String attack, String lick,
-            String listen, String dodge, String grab, boolean equipable)
+    public Item(String name, String look, String attack, String lick, String eat, String drink,
+            String crawl, String listen, String dodge, String grab, String use, boolean equipable)
     {
         this.name = name;
         this.look = look;
         this.attack = attack;
         this.lick = lick;
+        this.eat = eat;
+        this.drink = drink;
+        this.crawl = crawl;
         this.listen = listen;
         this.dodge = dodge;
         this.grab = grab;
+        this.use = use;
         this.equipable = equipable;
     }
     
@@ -95,6 +108,39 @@ public class Item
     }
     
     /**
+     * Sets their eat reponse
+     * 
+     * @param set attribute to set it to
+     * 
+     */
+    public void setEat(String set)
+    {
+        eat = set;
+    }
+    
+    /**
+     * Sets their drink reponse
+     * 
+     * @param set attribute to set it to
+     * 
+     */
+    public void setDrink(String set)
+    {
+        drink = set;
+    }
+    
+    /**
+     * Sets their crawl
+     * 
+     * @param set attribute to set it to
+     * 
+     */
+    public void setCrawl(String set)
+    {
+        crawl = set;
+    }
+    
+    /**
      * Sets their listen reponse
      * 
      * @param set attribute to set it to
@@ -125,6 +171,16 @@ public class Item
     public void setGrab(String set)
     {
         grab = set;
+    }
+    
+    /**
+     * Sets their use response
+     * 
+     * @param set attribute to set it to
+     */
+    public void setUse(String set)
+    {
+        use = set;
     }
     
     /**
@@ -186,6 +242,38 @@ public class Item
         return lick;
     }
     
+    /**
+     * Gets their eat response
+     * 
+     * @return String the String to return
+     * 
+     */
+    public String getEat()
+    {
+        return eat;
+    }
+    
+    /**
+     * Gets their drink response
+     * 
+     * @return String the String to return
+     * 
+     */
+    public String getDrink()
+    {
+        return drink;
+    }
+    
+    /**
+     * Gets their crawl
+     * 
+     * @return String the String to return
+     * 
+     */
+    public String getCrawl()
+    {
+        return crawl;
+    }
     
     /**
      * Gets their listen response
@@ -193,7 +281,7 @@ public class Item
      * @return String the String to return
      * 
      */
-    public String getLiten()
+    public String getListen()
     {
         return listen;
     }
@@ -219,6 +307,17 @@ public class Item
     public String getGrab()
     {
         return grab;
+    }
+    
+    /**
+     * gets the use response
+     * 
+     * @return String the String to return
+     * 
+     */
+    public String getUse()
+    {
+        return use;
     }
     
     /**
