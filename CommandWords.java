@@ -45,6 +45,7 @@ public class CommandWords
         validCommands.put("dodge", CommandWord.DODGE);
         validCommands.put("equip", CommandWord.EQUIP);
         validCommands.put("grab", CommandWord.GRAB);
+        validCommands.put("steal", CommandWord.STEAL);
         validCommands.put("drop", CommandWord.DROP);
         validCommands.put("inventory", CommandWord.INVENTORY);
     }

@@ -647,15 +647,27 @@ public class InternalCommandProcessor
         resolver.resolveRoom("forest").addNPC(new NPC("gnomes", "They're angry gnomes!", "You knock both gnomes our out of the air with two well timed punches.  Since they are so small your punches seem to have killed them. The second gnome drops the bottle onto the ground.|-aitem bottle look attack lick eat drink crawl listen dodge grab use 0|-rnpc gnomes forest", "They leer back.", "Yuck!", "More more, faster faster, it hurts so good!","You flee!|-mplayer cropfields", null, "You can't dodge both.", "You grab the first gnome out of the air and slam him into the ground, killing him.  The second gnome sails over your head and retreats into the hollowed out tree.  It looks like you should be able to crawl through to get inside.|-modnpc gnomes name gnome|-mnpc gnome to hollowedouttree"));
         resolver.resolveItemFromCurrentRoom("bottle").setGrab("You pick up the bottle off the ground.|-ainv bottle");
         resolver.resolveItemFromCurrentRoom("bottle").setLook("The energy or force inside this bottle is like nothing you’ve ever seen.  You can feel the power it contains just by holding it.  The pulsating blue light has a rather calming feel to it.  You should take your findings to the king.");
+        resolver.resolveRoom("forest").addItem(new Item("tree", "It has a hole in it. It looks like you could crawl through.", null, null, null, null, "You crawl into the inside the hollowed out tree. There are 2 small cots inside, it seems like the 2 gnomes were hiding out here. The second gnome is in the corner clutching the bottle.|-mplayer hollowedouttree |-hollowtree", null, null, null, null, false));
         resolver.resolveRoom("castle").setExtraDescription("As soon as you walk into the throne room, everyone, including the king eagerly looks to you.");
         resolver.resolveNPCFromCurrentRoom("king").removeAllTalk();
         resolver.resolveNPCFromCurrentRoom("king").addTalk("You show the king the bottle, and you tell him about the gnomes you found, and what happened at the water mill.  The king listens to what you say, then calmly rips the bottle out of your hand, and without a second thought uncorks it.  Energy explodes from inside the bottle, but this energy feels not harmful, but rather cool and soothing.  After a second, all of the energy has escaped the bottle.  The king then goes to a table, pours himself a glass of water, and slowly chugs it down.  After he is finished he explains what he thinks has happened.  That the gnomes have been stealing the properties of nature and putting them in bottles.  The force he just uncorked was water, and he hasn’t quenched his thirst for 2 days, which was why he really needed a drink.  He does not know why the gnomes are doing this, but he tasks you with finding the remaiming forces, to end all of this chaos.  He also tells you that he believes that there are 4 more bottled forces to find, and that when you find them, you should come back to the castle.|-rinv bottle|-phase2");
-        
     }
     
     private void goPhase2()
     {
-        //Make all the changes needed at phase change
+        resolver.resolveRoom("citygate").setDescription("You are at the entrance to the city.");
+        resolver.resolveRoom("citygate").setExtraDescription("It looks like the blood trail has been cleaned up, and there are now guards posted at the gates.");
+        resolver.resolveRoom("outsidethewatermill").setDescription("You are outside the water mill. The mill has started working again.");
+        resolver.resolveRoom("outsidethewatermill").setExtraDescription("It seems that the king uncorking the force of water has restored the river’s ability to push the water wheel.");
+        resolver.resolveRoom("insidethewatermill").setDescription("You are inside the water mill.  The bodies of the guards are gone.");
+        resolver.resolveRoom("insidethewatermill").setExtraDescription("There is nothing of importance in here.");
+        resolver.resolveRoom("insidethewatermill").removeItem(resolver.resolveItemFromGlobal("guards"));
+        resolver.resolveRoom("topoftheguardtower").setExtraDescription("From up here can you feel strong bursts of wind coming from the residential district, south of here.");
+        resolver.resolveRoom("market1").setExtraDescription("After looking around, you find a small hut with fire coming out of a chimney.  There is also a small shop set up outside the hut, with the owner standing next to it, trying to attract customers.  Upon further inspection, you notice on one of the shelves of the shop, a small bottle containing a bright dancing flame.");
+        resolver.resolveRoom("market1").addNPC(new NPC("merchant", "He's old. He stands as if a strong breeze would knock him over.", null, null, "Yummy!", null, null, null, null, null));
+        resolver.resolveRoom("market1").addItem(new Item("bottle", "The fire inside is brilliantly bright, and is in constant motion inside the bottle.", null, "IT BURNS", null, null, null, null, null, null, null, false));
+        resolver.resolveRoom("market1").addItem(new Item("fire bottle", "The fire inside is brilliantly bright, and is in constant motion inside the bottle.", null, "IT BURNS", null, null, null, null, null, null, null, false));
+        
     }
     
     private void goPhase3()
@@ -668,27 +680,25 @@ public class InternalCommandProcessor
         //Make all the changes needed at phase change
     }
     
-//     Not sure if this fits in the internal commands, will see later//
-//         private void goUse()
-//         {
-//             if(command.countTokens() >= 2)
-//             {
-//                 String item = command.nextToken();
-//                 Item itemToUse = resolver.resolveItemFromInventory(item);
-//                 if(itemToUse != null)
-//                 {
-//                     player.use(itemToUse);
-//                 }
-//                 else
-//                 {
-//                     System.out.println("Debug: couldn't find the item to drop in the player's inventory.");
-//                 }
-//             }
-//             else
-//             {
-//                 System.out.println("Debug: the use command didn't have enough words, needs at least 2 (command item)");
-//             }
-//         }
+    private void getStorm()
+    {
+        player.addToInventory(new Item("Storm Cloud Bottle", "As you hold the bottle in your hand, you can feel the raw energy the storm cloud possesses.  The energy in this bottle feels far more powerful and destructive than all the other forces you’ve obtained thus far.  While fire is destructive, it is also warmth and light.  This lighting is only destruction, and on a scale far greater than that of the bottled fire.  You should keep it for now.  That kind of power can be useful.", null, "Shockingly delicious!", "Not a good idea.", null, null, null, null, null, null, false));
+        
+    }
+    
+    private void hollowTree()
+    {
+        NPC gnome = resolver.resolveNPCFromCurrentRoom("gnome");
+        gnome.setLook("The gnome seems understandably scared. It doesn\'t look like he wants to fight.");
+        gnome.setAttack("You kick the gnome into the wall of the tree, killing it.  He drops the bottle onto the ground.|");//Put in thing for attack
+        
+        //////////////////^^^^^^^^^^^
+        
+        
+        gnome.setGrab("You pick the gnome up with the intention of throwing him into the wall but before you can he screams \"Wait!\".  You could either kill him, or torture him.");
+    }
+        
+    
     
     private void goCheckInventory()
     {
@@ -833,6 +843,12 @@ public class InternalCommandProcessor
                 break;
             case "-phase4":
                 goPhase4();
+                break;
+            case "-getstorm":
+                getStorm();
+                break;
+            case "-hollowtree":
+                hollowTree();
                 break;
 
             case "-checkinv":

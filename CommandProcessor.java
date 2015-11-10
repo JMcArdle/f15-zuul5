@@ -121,6 +121,9 @@ public class CommandProcessor
                 case GRAB:
                     goGrab();
                     break;
+                case STEAL:
+                    goGrab();
+                    break;
                 case DROP:
                     goDrop();
                     break;
@@ -767,7 +770,12 @@ public class CommandProcessor
         if(word2.equalsIgnoreCase("the"))
         {
             target = word3;
+            if(word4 != null)
+            {
+                //finish this later
+            }
         }
+                
         else
         {
             target = word2;
