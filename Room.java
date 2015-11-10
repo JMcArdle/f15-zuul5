@@ -32,9 +32,10 @@ public class Room
     ///constructor///
     
     /**
-     * Create a room described "description". Initially, it has
-     * no exits. "description" is something like "a kitchen" or
-     * "an open court yard".
+     * Create a new room
+     * 
+     * takes name, description
+     * 
      * @param description The room's description.
      */
     public Room(String name, String description) 
@@ -42,6 +43,25 @@ public class Room
         this.name = name;
         this.description = description;
         extraDescription = "You see nothing of importance.";
+        exits = new HashMap<String, Room>();
+        npcs = new ArrayList<NPC>();
+        items = new ArrayList<Item>();
+    }
+    
+    /**
+     * Create a new room
+     * 
+     * takes name, description, and extradescription
+     * 
+     * @param the room name
+     * @param description The room's description.
+     * @param description2 The rooom's extraDescription
+     */
+    public Room(String name, String description, String description2) 
+    {
+        this.name = name;
+        this.description = description;
+        extraDescription = description2;
         exits = new HashMap<String, Room>();
         npcs = new ArrayList<NPC>();
         items = new ArrayList<Item>();
@@ -196,6 +216,28 @@ public class Room
     public Room getExit(String direction) 
     {
         return exits.get(direction);
+    }
+    
+    /**
+     * Return the map of exits
+     * 
+     * @param direction The exit's direction.
+     * @return The room in the given direction.
+     */
+    public HashMap<String, Room> getAllExits() 
+    {
+        return exits;
+    }
+    
+    /**
+     * Return the room that is reached if we go from this room in direction
+     * "direction". If there is no room in that direction, return null.
+     * @param direction The exit's direction.
+     * @return The room in the given direction.
+     */
+    public int getNumExits() 
+    {
+        return exits.size();
     }
     
     

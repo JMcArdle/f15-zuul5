@@ -103,6 +103,17 @@ public class NPC
     }
     
     /**
+     * Method to remove all talk strings
+     */
+    public void removeAllTalk()
+    {
+        for(String say : talk)
+        {
+            talk.remove(say);
+        }
+    }
+    
+    /**
      * Sets their look reponse
      * 
      * @param set attribute to set it to

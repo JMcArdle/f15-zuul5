@@ -161,6 +161,37 @@ public class CommandProcessor
                 direction.equalsIgnoreCase("that"))
             {
                 direction = command.getFourthWord();
+                if(command.getFifthWord() != null)
+                {
+                    direction = direction + " " + command.getFifthWord();
+                }
+            }
+            else
+            {
+                if(command.getFourthWord() != null)
+                {
+                    direction = direction + " " + command.getFourthWord();
+                    if(command.getFifthWord() != null)
+                    {
+                        direction = direction + " " + command.getFifthWord();
+                    }
+                }
+            }
+            
+        }
+        else
+        {
+            if(command.getThirdWord() != null)
+            {
+                direction = direction + " " + command.getThirdWord();
+                if(command.getFourthWord() != null)
+                {
+                    direction = direction + " " + command.getFourthWord();
+                    if(command.getFifthWord() != null)
+                    {
+                        direction = direction + " " + command.getFifthWord();
+                    }
+                }
             }
         }
 
@@ -532,8 +563,9 @@ public class CommandProcessor
         System.out.println("You flee the area!");
         
         Random rng = new Random();
-        int goTo = rng.nextInt(currentRoom.exits.size());
-        currentRoom = currentRoom.extis.get(goTo);
+        int goTo = rng.nextInt(currentRoom.getNumExits());
+        Room[] exits = (Room[]) (currentRoom.getAllExits().keySet().toArray());
+        currentRoom = exits[goTo];
         output = currentRoom.getDescription();
         if(!printOutput())
         {
