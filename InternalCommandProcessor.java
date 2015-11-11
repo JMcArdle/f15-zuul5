@@ -188,6 +188,7 @@ public class InternalCommandProcessor
     {
         if(command.countTokens() == 12)
         {
+            String room = command.nextToken();
             String name = command.nextToken();
             String look = command.nextToken();
             String attack = command.nextToken();
@@ -198,9 +199,27 @@ public class InternalCommandProcessor
             String listen = command.nextToken();
             String dodge = command.nextToken();
             String grab = command.nextToken();
-            String room = command.nextToken();
             Room goTo = null;
             goTo = resolver.resolveRoom(room);
+            
+            if (look.equalsIgnoreCase("null"))
+                look=null;
+            if (attack.equalsIgnoreCase("null"))
+                attack=null;
+            if (leer.equalsIgnoreCase("null"))
+                leer=null;
+            if (lick.equalsIgnoreCase("null"))
+                lick=null;
+            if (torture.equalsIgnoreCase("null"))
+                torture=null;
+            if (escape.equalsIgnoreCase("null"))
+                escape=null;
+            if (listen.equalsIgnoreCase("null"))
+                listen=null;
+            if (dodge.equalsIgnoreCase("null"))
+                dodge=null;
+            if (grab.equalsIgnoreCase("null"))
+                grab=null;     
             if (goTo != null)
             {
                 goTo.addNPC(new NPC(name,look,attack,leer,lick,torture,escape,listen,dodge,grab));
@@ -212,7 +231,7 @@ public class InternalCommandProcessor
         }
         else
         {
-            System.out.println("Debug: addNPC internal command needs 12 words (command, 10 words for the signature, and the room name");
+            System.out.println("Debug: addNPC internal command needs 12 words (command, 10 words for the signature, and the room name)");
         }
     }
     
@@ -325,6 +344,7 @@ public class InternalCommandProcessor
     {
         if(command.countTokens() == 14)
         {
+            String room = command.nextToken();
             String name = command.nextToken();
             String look = command.nextToken();
             String attack = command.nextToken();
@@ -338,8 +358,28 @@ public class InternalCommandProcessor
             String use = command.nextToken();
             String eq = command.nextToken();
             boolean equipable = false;
-            String room = command.nextToken();
             Room goTo = null;
+            
+            if (look.equalsIgnoreCase("null"))
+                look=null;
+            if (attack.equalsIgnoreCase("null"))
+                attack=null;
+            if (lick.equalsIgnoreCase("null"))
+                lick=null;
+            if (eat.equalsIgnoreCase("null"))
+                eat=null;
+            if (drink.equalsIgnoreCase("null"))
+                drink=null;
+            if (crawl.equalsIgnoreCase("null"))
+                crawl=null;
+            if (listen.equalsIgnoreCase("null"))
+                listen=null;
+            if (dodge.equalsIgnoreCase("null"))
+                dodge=null;
+            if (grab.equalsIgnoreCase("null"))
+                grab=null;
+            if (use.equalsIgnoreCase("null"))
+                use=null;
             if (eq.equalsIgnoreCase("1") || eq.equalsIgnoreCase("01") || eq.equalsIgnoreCase("yes") || eq.equalsIgnoreCase("true"))
             {
                 equipable = true;
@@ -478,54 +518,61 @@ public class InternalCommandProcessor
             String arg1 = command.nextToken();
             String arg2 = command.nextToken();
             String arg3 = command.nextToken();
-            while(command.hasMoreTokens())
+            if (arg3.equalsIgnoreCase("null"))
             {
-                arg3 = arg3 + " " + command.nextToken();
-            }
-            Item targetItem = resolver.resolveItemFromCurrentRoom(arg1);
-            if(targetItem == null)
-            {
-                targetItem = resolver.resolveItemFromGlobal(arg1);
-            }
-            if(targetItem != null)
-            {
-                switch(arg2.trim().toLowerCase())
-                {
-                    case "name":
-                        targetItem.setName(arg3);
-                        break;
-                    case "look":
-                        targetItem.setLook(arg3);
-                        break;
-                    case "attack":
-                        targetItem.setAttack(arg3);
-                        break;
-                    case "lick":
-                        targetItem.setLick(arg3);
-                        break;
-                    case "eat":
-                        targetItem.setEat(arg3);
-                        break;
-                    case "drink":
-                        targetItem.setDrink(arg3);
-                        break;
-                    case "listen":
-                        targetItem.setListen(arg3);
-                        break;
-                    case "dodge":
-                        targetItem.setDodge(arg3);
-                        break;
-                    case "grab":
-                        targetItem.setGrab(arg3);
-                        break;
-                    default:
-                        System.out.println("Debug: modify item recieved a field to modify that isn't doesn't exist");
-                        break;
-                }
+                arg3 = null;
             }
             else
             {
-                System.out.println("Debug: could not find the item");
+                while(command.hasMoreTokens())
+                {
+                    arg3 = arg3 + " " + command.nextToken();
+                }
+                Item targetItem = resolver.resolveItemFromCurrentRoom(arg1);
+                if(targetItem == null)
+                {
+                    targetItem = resolver.resolveItemFromGlobal(arg1);
+                }
+                if(targetItem != null)
+                {
+                    switch(arg2.trim().toLowerCase())
+                    {
+                        case "name":
+                            targetItem.setName(arg3);
+                            break;
+                        case "look":
+                            targetItem.setLook(arg3);
+                            break;
+                        case "attack":
+                            targetItem.setAttack(arg3);
+                            break;
+                        case "lick":
+                            targetItem.setLick(arg3);
+                            break;
+                        case "eat":
+                            targetItem.setEat(arg3);
+                            break;
+                        case "drink":
+                            targetItem.setDrink(arg3);
+                            break;
+                        case "listen":
+                            targetItem.setListen(arg3);
+                            break;
+                        case "dodge":
+                            targetItem.setDodge(arg3);
+                            break;
+                        case "grab":
+                            targetItem.setGrab(arg3);
+                            break;
+                        default:
+                            System.out.println("Debug: modify item recieved a field to modify that isn't doesn't exist");
+                            break;
+                    }
+                }
+                else
+                {
+                    System.out.println("Debug: could not find the item");
+                }
             }
         }
         else
@@ -631,6 +678,19 @@ public class InternalCommandProcessor
         }
     }
     
+    private void goGameOver()
+    {
+        System.out.println("GAME OVER\n\nPress the Enter button to exit.");
+        try
+        {
+            System.in.read();
+        }
+        catch(Exception E)
+        {
+        }
+        System.exit(0);
+    }
+    
     private void goPhase1()
     {
         resolver.resolveRoom("citygate").setDescription("You are at the city gate.  There is a blood trail leading outside the city.");
@@ -644,9 +704,9 @@ public class InternalCommandProcessor
         resolver.resolveRoom("cropfields").setExtraDescription("The blood trail is leading you north towards the forest.");
         resolver.resolveRoom("forest").setDescription("You are in the forest outside the city.  Following the blood trail, you find 2 gnomes attempting to crawl under a hollowed out tree.");
         resolver.resolveRoom("forest").setExtraDescription("The gnomes are both about a foot tall.  One of them is bleeding from his leg, from what looks like a knife wound. The other gnome is holding a small bottle in his hands filled with some kind of low pulsating blue light. They have noticed your presence and they both leap at you.");
-        resolver.resolveRoom("forest").addNPC(new NPC("gnomes", "They're angry gnomes!", "You knock both gnomes our out of the air with two well timed punches.  Since they are so small your punches seem to have killed them. The second gnome drops the bottle onto the ground.|-aitem bottle look attack lick eat drink crawl listen dodge grab use 0|-rnpc gnomes forest", "They leer back.", "Yuck!", "More more, faster faster, it hurts so good!","You flee!|-mplayer cropfields", null, "You can't dodge both.", "You grab the first gnome out of the air and slam him into the ground, killing him.  The second gnome sails over your head and retreats into the hollowed out tree.  It looks like you should be able to crawl through to get inside.|-modnpc gnomes name gnome|-mnpc gnome to hollowedouttree"));
+        resolver.resolveRoom("forest").addNPC(new NPC("gnomes", "They're angry gnomes!", "You knock both gnomes our out of the air with two well timed punches.  Since they are so small your punches seem to have killed them. The second gnome drops the bottle onto the ground.|-aitem forest bottle look null null null null null null null grab null false|-rnpc gnomes forest", "They leer back.", "Yuck!", "More more, faster faster, it hurts so good!","You flee!|-mplayer cropfields", null, "You can't dodge both.", "You grab the first gnome out of the air and slam him into the ground, killing him.  The second gnome sails over your head and retreats into the hollowed out tree.  It looks like you should be able to crawl through to get inside.|-modnpc gnomes name gnome|-mnpc gnome to hollowedouttree"));
         resolver.resolveItemFromCurrentRoom("bottle").setGrab("You pick up the bottle off the ground.|-ainv bottle");
-        resolver.resolveItemFromCurrentRoom("bottle").setLook("The energy or force inside this bottle is like nothing you’ve ever seen.  You can feel the power it contains just by holding it.  The pulsating blue light has a rather calming feel to it.  You should take your findings to the king.");
+        resolver.resolveItemFromCurrentRoom("bottle").setLook("The energy or force inside this bottle is like nothing you’ve ever seen.  You can feel the power it contains just by looking at it.  The pulsating blue light has a rather calming feel to it.  You should take your findings to the king.");
         resolver.resolveRoom("forest").addItem(new Item("tree", "It has a hole in it. It looks like you could crawl through.", null, null, null, null, "You crawl into the inside the hollowed out tree. There are 2 small cots inside, it seems like the 2 gnomes were hiding out here. The second gnome is in the corner clutching the bottle.|-mplayer hollowedouttree |-hollowtree", null, null, null, null, false));
         resolver.resolveRoom("castle").setExtraDescription("As soon as you walk into the throne room, everyone, including the king eagerly looks to you.");
         resolver.resolveNPCFromCurrentRoom("king").removeAllTalk();
@@ -665,8 +725,10 @@ public class InternalCommandProcessor
         resolver.resolveRoom("topoftheguardtower").setExtraDescription("From up here can you feel strong bursts of wind coming from the residential district, south of here.");
         resolver.resolveRoom("market1").setExtraDescription("After looking around, you find a small hut with fire coming out of a chimney.  There is also a small shop set up outside the hut, with the owner standing next to it, trying to attract customers.  Upon further inspection, you notice on one of the shelves of the shop, a small bottle containing a bright dancing flame.");
         resolver.resolveRoom("market1").addNPC(new NPC("merchant", "He's old. He stands as if a strong breeze would knock him over.", null, null, "Yummy!", null, null, null, null, null));
-        resolver.resolveRoom("market1").addItem(new Item("bottle", "The fire inside is brilliantly bright, and is in constant motion inside the bottle.", null, "IT BURNS", null, null, null, null, null, null, null, false));
-        resolver.resolveRoom("market1").addItem(new Item("fire bottle", "The fire inside is brilliantly bright, and is in constant motion inside the bottle.", null, "IT BURNS", null, null, null, null, null, null, null, false));
+        resolver.resolveNPCFromCurrentRoom("merchant").addTalk("\"Ah, hello good sir, see anything that interests you.?\"\nYou ask about the bottle of fire.\n\"I’m sorry good sir, but that is not for sale. I just put that there to attract customers.  it’s nothing special, really.\"");
+        resolver.resolveRoom("market1").addItem(new Item("bottle", "The fire inside is brilliantly bright, and is in constant motion inside the bottle.", null, "IT BURNS", null, null, null, null, null, "You wait for the shopkeeper’s attention to go elsewhere, then you quickly grab the bottle and walk away.|-ainv fire|-ritem bottle from market1|-moditem fire grab null", null, false));
+        resolver.resolveRoom("market1").addItem(new Item("fire", "The fire inside is brilliantly bright, and is in constant motion inside the bottle.", null, "IT BURNS", null, null, null, null, null, "You wait for the shopkeeper’s attention to go elsewhere, then you quickly grab the bottle and walk away.|-ainv fire|-ritem bottle from market1", null, false));
+        
         
     }
     
@@ -690,12 +752,21 @@ public class InternalCommandProcessor
     {
         NPC gnome = resolver.resolveNPCFromCurrentRoom("gnome");
         gnome.setLook("The gnome seems understandably scared. It doesn\'t look like he wants to fight.");
-        gnome.setAttack("You kick the gnome into the wall of the tree, killing it.  He drops the bottle onto the ground.|");//Put in thing for attack
+        gnome.setAttack("You kick the gnome into the wall of the tree, killing it.  He drops the bottle onto the ground.|-aitem hollowedouttree bottle look null null null null null null null \\n|-bottleDrop null false) ");//Put in thing for attack
+        gnome.setGrab("You pick the gnome up with the intention of throwing him into the wall but before you can he screams “Wait!”.  You could either kill him, or listen to what he has to say.");
+        gnome.setListen("\"I don’t have time for your meddling, you stupid human.\" Before you have time to react, he pulls a dagger out of nowhere, and slits your throat.|-gameover");
         
-        //////////////////^^^^^^^^^^^
-        
-        
-        gnome.setGrab("You pick the gnome up with the intention of throwing him into the wall but before you can he screams \"Wait!\".  You could either kill him, or torture him.");
+    }
+    
+    private void bottleDrop()
+    {
+        resolver.resolveItemFromCurrentRoom("bottle").setLook("It looks like there is water inside.");
+        resolver.resolveItemFromCurrentRoom("bottle").setGrab("The energy or force inside this bottle is like nothing you’ve ever seen.  You can feel the power it contains just by looking at it.  The pulsating blue light has a rather calming feel to it.  You should take your findings to the king.|-ainv bottle");
+    }
+    
+    private void unlockDoor()
+    {
+        resolver.resolveRoom("dungeonroom17").addExit("door", resolver.resolveRoom("dungeonroom18"));
     }
         
     
@@ -832,6 +903,9 @@ public class InternalCommandProcessor
             case "-drop":
                 goDrop();
                 break;
+            case "-gameover":
+                goGameOver();
+                break;
             case "-phase1":
                 goPhase1();
                 break;
@@ -849,6 +923,12 @@ public class InternalCommandProcessor
                 break;
             case "-hollowtree":
                 hollowTree();
+                break;
+            case "-bottledrop":
+                bottleDrop();
+                break;
+            case "-unlockdoor":
+                unlockDoor();
                 break;
 
             case "-checkinv":

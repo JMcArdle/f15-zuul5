@@ -103,6 +103,19 @@ public class NPC
     }
     
     /**
+     * Method for removing everything an npc will say
+     * 
+     */
+    public void removeAllTalk()
+    {
+        for(String say : talk)
+        {
+            talk.remove(say);
+        }
+    }
+    
+    
+    /**
      * Sets their look reponse
      * 
      * @param set attribute to set it to

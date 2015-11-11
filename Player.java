@@ -152,6 +152,14 @@ public class Player
         return inventory;
     }
     
+    /**
+     * returns the players's equipped item
+     * @return an ArrayList containing the player's inventory
+     */
+    public Item getEquipped()
+    {
+        return equipped;
+    }
     
     
     
