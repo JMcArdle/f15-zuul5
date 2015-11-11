@@ -19,6 +19,7 @@ public class InternalCommandProcessor
     private Room currentRoom;
     private ArrayList<Room> allRooms;
     private NameResolver resolver;
+    private int bottles = 0;
 
     /**
      * Constructor
@@ -725,31 +726,53 @@ public class InternalCommandProcessor
         resolver.resolveRoom("topoftheguardtower").setExtraDescription("From up here can you feel strong bursts of wind coming from the residential district, south of here.");
         resolver.resolveRoom("market1").setExtraDescription("After looking around, you find a small hut with fire coming out of a chimney.  There is also a small shop set up outside the hut, with the owner standing next to it, trying to attract customers.  Upon further inspection, you notice on one of the shelves of the shop, a small bottle containing a bright dancing flame.");
         resolver.resolveRoom("market1").addNPC(new NPC("merchant", "He's old. He stands as if a strong breeze would knock him over.", null, null, "Yummy!", null, null, null, null, null));
-        resolver.resolveNPCFromCurrentRoom("merchant").addTalk("\"Ah, hello good sir, see anything that interests you.?\"\nYou ask about the bottle of fire.\n\"I’m sorry good sir, but that is not for sale. I just put that there to attract customers.  it’s nothing special, really.\"");
-        resolver.resolveRoom("market1").addItem(new Item("bottle", "The fire inside is brilliantly bright, and is in constant motion inside the bottle.", null, "IT BURNS", null, null, null, null, null, "You wait for the shopkeeper’s attention to go elsewhere, then you quickly grab the bottle and walk away.|-ainv fire|-ritem bottle from market1|-moditem fire grab null", null, false));
-        resolver.resolveRoom("market1").addItem(new Item("fire", "The fire inside is brilliantly bright, and is in constant motion inside the bottle.", null, "IT BURNS", null, null, null, null, null, "You wait for the shopkeeper’s attention to go elsewhere, then you quickly grab the bottle and walk away.|-ainv fire|-ritem bottle from market1", null, false));
+        resolver.resolveNPCFromGlobal("merchant").addTalk("\"Ah, hello good sir, see anything that interests you.?\"\nYou ask about the bottle of fire.\n\"I’m sorry good sir, but that is not for sale. I just put that there to attract customers.  it’s nothing special, really.\"");
+        resolver.resolveRoom("market1").addItem(new Item("bottle", "The fire inside is brilliantly bright, and is in constant motion inside the bottle.", null, "IT BURNS", null, null, null, null, null, "You wait for the shopkeeper’s attention to go elsewhere, then you quickly grab the bottle and walk away.|-getfire|-ritem bottle from market1|-moditem fire grab null", null, false));
+        resolver.resolveRoom("market1").addItem(new Item("fire", "The fire inside is brilliantly bright, and is in constant motion inside the bottle.", null, "IT BURNS", null, null, null, null, null, "You wait for the shopkeeper’s attention to go elsewhere, then you quickly grab the bottle and walk away.|-getfire|-ritem bottle from market1", null, false));
         resolver.resolveRoom("market2").addNPC(new NPC("merchant", "A middle aged man with a rough demeanor.", null, null, "Yummy yummy in my tummy!", null, null, null, null, null));
-        resolver.resolveRoom("market2").setExtraDescription("Most of the merchants selling food are dangerously low on product. But surprisingly, there is one merchant who has a large stock of various produce.  There is a large crowd around his stand since he is the only one with anything to sell.");
-        resolver.resolveNPCFromCurrentRoom("merchant").addTalk("You inquire as to how he is able to have this much stock on food.  He tells you that one of the farms, north of the city gate, has been able to grow good quality food without difficulty.  The court mage told you that none of the farmers have been able to grow any crops.  Because of this, you should go investigate the crops fields.");
+        resolver.resolveRoom("market2").setExtraDescription("Most of the vendors selling food are dangerously low on product. But surprisingly, there is one vendor who has a large stock of various produce.  There is a large crowd around his stand since he is the only one with anything to sell.");
+        resolver.resolveNPCFromGlobal("vendor").addTalk("You inquire as to how he is able to have this much stock on food.  He tells you that one of the farms, north of the city gate, has been able to grow good quality food without difficulty.  The court mage told you that none of the farmers have been able to grow any crops.  Because of this, you should go investigate the crops fields.");
         resolver.resolveRoom("residential2").setExtraDescription("There is a group of children running around playing, but no adults to be seen. Upon further inspection of the children, you notice that one of them is clutching a small bottle in his hands, containing what looks like a strong gust of wind.");
-        resolver.resolveRoom("");
-        
+        resolver.resolveNPCFromGlobal("children").addTalk("What do you want mister? My bottle?!  You can’t have it, it’s MINE!  We finally have something fun to play with, and we’re not letting you have it!");
+        resolver.resolveNPCFromGlobal("children").setLeer("We’re not scared of you mister. What are you going to do? Tell our parents? You continue staring at them. They all start to look really nervous.  The kid holding the bottle glares at you defiantly, but then grudgingly hands you the bottle.|-kidbottle");
+        resolver.resolveRoom("cropfields").setExtraDescription("After looking around, you notice a farm that is flourishing with growth.  All the other farms around are failing to grow anything, but this farm seems to be having no trouble.  You see the farmer walking out of his house.  You approach him.|-farmer");
+        resolver.resolveRoom("castle").setExtraDescription("There is nothing of importance in here.");
     }
     
     private void goPhase3()
     {
-        //Make all the changes needed at phase change
+        resolver.resolveRoom("topoftheguardtower").setExtraDescription("After looking around you notice a large hole in the ceiling of the soldier barracks, southwest of here.");
+        resolver.resolveRoom("market1").setExtraDescription("There is nothing of importance here.");
+        resolver.resolveRoom("market2").setExtraDescription("There is nothing of importance here.");
+        resolver.resolveRoom("cropfields").setExtraDescription("There is nothing of importance here.");
+        resolver.resolveRoom("residential2").setExtraDescription("There is nothing of importance here.");
+        resolver.resolveRoom("outsidethesoldierbarracks").setExtraDescription("There is usually someone watching the entrance inside, but for some reason the door is wide open.  There looks like there is a commotion inside.");
+        resolver.resolveRoom("outsidethesoldierbarracks").addExit("soldier barracks", resolver.resolveRoom("insidethesoldierbarracks"));
     }
     
     private void goPhase4()
     {
-        //Make all the changes needed at phase change
+        resolver.resolveRoom("topoftheguardtower").setExtraDescription("You see nothing of importance from up here.");
+        resolver.resolveRoom("outsidethesoldierbarracks").setExtraDescription("You see nothing of importance from up here.");
+        resolver.resolveRoom("insidethesoldierbarracks").setExtraDescription("You see nothing of importance from up here.");
+        resolver.resolveRoom("castle").setDescription("You are inside the castle, in the throne room.  The king is standing before you and wishes to speak with you.|-lightningincastle");
+        resolver.resolveRoom("castle").setExtraDescription("After entering the throne room, you start to feel some movement inside of your bag.  After taking off your bag and looking inside, you find that the storm cloud is thrashing violently inside of its bottle.  The storm cloud almost appears to have a mind of its own, and right now, it clearly wants out of the bottle.");
+        resolver.resolveNPCFromGlobal("king").removeAllTalk();
+        resolver.resolveNPCFromGlobal("king").addTalk("You approach the king and inform him that you have collected all of the bottled forces.  He tells you that you should not release them yet before finding the gnomes and dealing with them first, otherwise the gnomes will just bottle them all up again.  He also tells you that in order for the gnomes to have accomplished what they did, they would have had to have a secret way to enter the city, and that finding that secret entrance is your key to finding the gnomes.  He suggests starting your search somewhere quiet and secluded.");
+    }
+    
+    private void getFire()
+    {
+        player.addToInventory(resolver.resolveItemFromCurrentRoom("fire"));
+        bottles += 1;
+        phase3Check();
     }
     
     private void getStorm()
     {
-        player.addToInventory(new Item("Storm Cloud Bottle", "As you hold the bottle in your hand, you can feel the raw energy the storm cloud possesses.  The energy in this bottle feels far more powerful and destructive than all the other forces you’ve obtained thus far.  While fire is destructive, it is also warmth and light.  This lighting is only destruction, and on a scale far greater than that of the bottled fire.  You should keep it for now.  That kind of power can be useful.", null, "Shockingly delicious!", "Not a good idea.", null, null, null, null, null, null, false));
-        
+        player.addToInventory(new Item("Lightning", "As you hold the bottle in your hand, you can feel the raw energy the storm cloud possesses.  The energy in this bottle feels far more powerful and destructive than all the other forces you’ve obtained thus far.  While fire is destructive, it is also warmth and light.  This lighting is only destruction, and on a scale far greater than that of the bottled fire.  You should keep it for now.  That kind of power can be useful.", null, "Shockingly delicious!", "Not a good idea.", null, null, null, null, null, null, false));
+        bottles += 1;
+        goPhase4();
     }
     
     private void hollowTree()
@@ -759,20 +782,60 @@ public class InternalCommandProcessor
         gnome.setAttack("You kick the gnome into the wall of the tree, killing it.  He drops the bottle onto the ground.|-aitem hollowedouttree bottle look null null null null null null null \\n|-bottleDrop null false) ");//Put in thing for attack
         gnome.setGrab("You pick the gnome up with the intention of throwing him into the wall but before you can he screams “Wait!”.  You could either kill him, or listen to what he has to say.");
         gnome.setListen("\"I don’t have time for your meddling, you stupid human.\" Before you have time to react, he pulls a dagger out of nowhere, and slits your throat.|-gameover");
-        
     }
     
     private void bottleDrop()
     {
         resolver.resolveItemFromCurrentRoom("bottle").setLook("It looks like there is water inside.");
         resolver.resolveItemFromCurrentRoom("bottle").setGrab("The energy or force inside this bottle is like nothing you’ve ever seen.  You can feel the power it contains just by looking at it.  The pulsating blue light has a rather calming feel to it.  You should take your findings to the king.|-ainv bottle");
+        bottles+=1;
+        phase3Check();
     }
     
     private void unlockDoor()
     {
         resolver.resolveRoom("dungeonroom17").addExit("door", resolver.resolveRoom("dungeonroom18"));
     }
+    
+    private void kidBottle()
+    {
+        resolver.resolveRoom("residential2").addItem(new Item("wind", "The force of the wind is almost moving the bottle in your hands. The wind inside is constantly moving and changing directions. You should keep this for now, in case you need it later.", null, "Tastes like the winds.", null, null, null, null, null, null, null, false));
+        player.addToInventory(resolver.resolveItemFromCurrentRoom("wind"));
+        bottles+=1;
+        phase3Check();
+    }
+    
+    private void farmer()
+    {
+        resolver.resolveRoom("cropfields").addNPC(new NPC("farmer", "He looks like a dusty old fart.", null, "The dusty old fart leers back at you.", "He tastes like a dusty old fart.", "He moans like a dusty old fart.", "You can't escape a dusty old fart.", "Sounds like a dusty old fart.", "You can't dodge a dusty old fart.", null));
+        resolver.resolveNPCFromCurrentRoom("farmer").addTalk("\"What’s that now? You want to know how my farm is able to grow anything?  Well I’m not really sure.  Even since I found this I haven’t had any trouble.\" He then pulls out a small bottle containing some sort of bright green energy.  You then tell him that the king has tasked you with finding the stolen forces of nature, and that what he found is one of them.  After hearing that he agrees to give you the bottle.|-getfarmerbottle");
+    }
+    
+    private void getFarmerBottle()
+    {
+        player.addToInventory(new Item("life", "The energy inside this bottle is different from the others. It resonates with you in a way, as if you yourself are a part of this energy. You come to the conclusion this must be the very essence of life itself. You should keep this bottle in case you need it later.", null, "Tastes like life cereal!", null, null, null, null, null, null, null, false));
+        bottles += 1;
+    }
+    
+    private void phase3Check()
+    {
+        if(bottles == 4)
+        {
+            goPhase3();
+        }
+    }
+
+    private void lightningInCastle()
+    {
+        resolver.resolveItemFromInventory("lightning").setUse("As soon as you uncork the bottle, lighting courses out and strikes the wall directly behind the throne.  You quickly recork the bottle, and then gaze at the wall that the lighting struck.  The wall begins to crumble to reveal a secret path.|-ulocksecretpath");
+    }
+    
+    private void unlockSecretPath()
+    {
+        resolver.resolveRoom("castle").addExit("secret path", resolver.resolveRoom("secretpath"));
+    }
         
+    
     
     
     private void goCheckInventory()
@@ -933,6 +996,18 @@ public class InternalCommandProcessor
                 break;
             case "-unlockdoor":
                 unlockDoor();
+                break;
+            case "-kidbottle":
+                kidBottle();
+                break;
+            case "-farmer":
+                farmer();
+                break;
+            case "-lightningincastle":
+                lightningInCastle();
+                break;
+            case "-unlocksecretpath":
+                unlockSecretPath();
                 break;
 
             case "-checkinv":
