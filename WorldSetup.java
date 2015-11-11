@@ -78,136 +78,192 @@ public class WorldSetup
         
        insidethesoldierbarracks = new Room ("insidethesoldierbarracks", "You are inside the soldier barracks.  All of the soldiers inside are standing around, looking a big hole in the ceiling." , "While most of the soldiers are standing under the hole in the ceiling, trying to figure out what happened, one of the soldiers is standing off to the side, looking rather nervous.  He seems to recognize you and decides to approach you. He tells you \"You’re the guy that the king hired right?  The one who’s supposed to get to the bottom of all this insanity?  Listen, I didn’t mean to for this to happen.  This morning I found this bottle outside.\" He pulls a small bottle out of his pocket, containing what looks like a tiny storm cloud.  \“I thought it looked cool, or at least was worth something, so I didn’t tell anybody.  Just a little while ago, I decided to try uncorking it, just to see what would happen right. As soon as I did, a freaking lightning bolt shot straight out and up, tearing through the ceiling.  I managed to get the cork back on before something else happened.  This thing is too destructive, so please take it.  I hope with it you can fix everything that’s been going wrong.\”  He hands you the bottle.|-getstorm");
        
-       hallowedouttree = new Room("hallowedouttree", "You are in the city inn.  Since it’s the middle of the day, no one is inside besides the barkeep.", "The only person inside the inn is the barkeep.");
+       hallowedouttree = new Room("hallowedouttree", "You are inside the hollowed out tree. There are two small cots inside, it seems like the two gnomes were hiding out here. The second gnome is in the corner clutching the bottle.", "The gnome seems understandably scared, it doesn't look like he wants to fight.");
        
-       secrettunnel = new Room("secrettunnel", "You are in the city inn.  Since it’s the middle of the day, no one is inside besides the barkeep.", "The only person inside the inn is the barkeep.");
+       secrettunnel = new Room("secrettunnel", "You are in a secret path in the castle. You do not know where this leads, but after following the path north, the path turns to the east.", "There is not much to look at in here. It is a dark and boring path. You do however, notice a small key attatched to a chain, hanging on the wall. You decide to take it, as the key should prove useful later on.|-ainb key");
         
-       dungeonentrance = new Room("dungeonentrance", "You are inside the dungeon entrance." , "As soon as you enter, you realize that the door behind you suddenly locks, trapping you inside. Looks like it’s a one way journey from here on out.");
+       dungeonentrance = new Room("dungeonentrance", "You are inside the dungeon entrance." , "As soon as you enter, you realize that the door behind you suddenly locks, trapping you inside. Looks like it’s a one way journey from here on out. You can go North.");
         
-       dungeonmainroom = new Room("dungeonmainroom", "You are inside the main room." , "You walk in only to realize that the entire room is pitch black. You can’t make any sense of where you are going and in which direction.");
+       dungeonmainroom = new Room("dungeonmainroom", "You are inside the main room." , "You walk in only to realize that the entire room is pitch black. You can’t make any sense of where you are going and in which direction.|-moditem fire use An immense fire escapes from the bottle, lighting up the room and allowing you to see the paths ahead. You can go North, East or West.");
        
-       dungeonroom3 = new Room("dungeonroom3", "You are inside a passageway." , "Go East, West");
+       dungeonroom3 = new Room("dungeonroom3", "You are inside a passageway." , "You can go East or West");
        
-       dungeonroom4 = new Room("dungeonroom4", "You are inside a small hall." , "Go West, North");
+       dungeonroom4 = new Room("dungeonroom4", "You are inside a small hall." , "You can go West or North");
        
-       dungeonroom5 = new Room("dungeonroom5", "You are inside a room with a crater." , "Go North, South");
+       dungeonroom5 = new Room("dungeonroom5", "You are inside a room with a crater." , "You can go North or South");
         
-       dungeonroom6 = new Room("dungeonroom6", "You are inside a room filled with water." , "Go East, South");
+       dungeonroom6 = new Room("dungeonroom6", "You are inside a room filled with water." , "You can go East or South");
        
-       dungeonroom7 = new Room("dungeonroom7", "You are inside a room with holes." , "Go East, West");
+       dungeonroom7 = new Room("dungeonroom7", "You are inside a room with holes." , "You can go East or West");
        
-       dungeonroom8 = new Room("dungeonroom8", "You are inside a tunnel." , "You see that the entire room is deep in fog.  Its so dense that you cannot find your way through.");
+       dungeonroom8 = new Room("dungeonroom8", "You are inside a tunnel." , "You see that the entire room is deep in fog.  Its so dense that you cannot find your way through.|-moditem wind use A gust of wind releases from the bottle, blowing away all the fog surrounding the area. You are able to see the path ahead of you. You can go West or South.");
        
-       dungeonroom9 = new Room("dungeonroom9", "You are inside a large tunnel." , "Go North, South");
+       dungeonroom9 = new Room("dungeonroom9", "You are inside a large tunnel." , "You can go North or South");
        
-       dungeonroom10 = new Room("dungeonroom10", "You are inside a narrow corridor." , "Go West, East");
+       dungeonroom10 = new Room("dungeonroom10", "You are inside a narrow corridor." , "You can go West or East");
         
-       dungeonroom11 = new Room("dungeonroom11", "You are inside a large room." , "As you enter, you approach a giant statue covering the exit. Pushing it seems impossible, it barely moves an inch.");
+       dungeonroom11 = new Room("dungeonroom11", "You are inside a large room." , "As you enter, you approach a giant statue covering the exit. Pushing it seems impossible, it barely moves an inch.|-moditem life use A green essence is released from the bottle and shrouds itself around the statue, causing it to shake and come to life. The statue takes one step to the right and sits down, revealing the exits. You can go West and East.");
        
        dungeonroom12 = new Room("dungeonroom12", "You are in an unfamiliar place." , "You feel a foreboding presence in the room, although it is not yet known to you. Only hearty laughter can be heard as you make your way closer.");
         
-       dungeonroom13 = new Room("dungeonroom13", "You are inside a small den." , "Go East, North");
+       dungeonroom13 = new Room("dungeonroom13", "You are inside a small den." , "You can go East or North");
         
-       dungeonroom14 = new Room("dungeonroom14", "You are inside a room with glowing diamonds." , "Go South, East");
+       dungeonroom14 = new Room("dungeonroom14", "You are inside a room with glowing diamonds." , "You can go South or East");
        
-       dungeonroom15 = new Room("dungeonroom15", "You are inside a room with catacombs." , "Go North, South");
+       dungeonroom15 = new Room("dungeonroom15", "You are inside a room with catacombs." , "You can go North or South");
        
-       dungeonroom16 = new Room("dungeonroom16", "You are inside a large chamber." , "Go North, South");
+       dungeonroom16 = new Room("dungeonroom16", "You are inside a large chamber." , "You can go North or South");
         
-       dungeonroom17 = new Room("dungeonroom17", "You are inside a very large room." , "As you enter, you notice a strange looking door at the other end of the room. Upon further inspection, there seems to be a small lock attached to it. Go: North, East, West");
+       dungeonroom17 = new Room("dungeonroom17", "You are inside a very large room." , "As you enter, you notice a strange looking door at the other end of the room. Upon further inspection, there seems to be a small lock attached to it.|-moditem key use You use the key to unlock the door, allowing entrance to another room. You can go North, East, or West.|-unlockdoor");
         
-       dungeonroom18 = new Room("dungeonroom18", "You are inside a room with staircases." , "Go South, East");
+       dungeonroom18 = new Room("dungeonroom18", "You are inside a room with staircases." , "You can go South or East");
         
-       dungeonroom19 = new Room("dungeonroom19", "You are inside a passageway." , "Go West, South");
+       dungeonroom19 = new Room("dungeonroom19", "You are inside a passageway." , "You can go West or South");
         
-       dungeonroom20 = new Room("dungeonroom20", "You are at a dead end." , "Go East");
+       dungeonroom20 = new Room("dungeonroom20", "You are at a dead end." , "You can go East");
         
-       dungeonroom21 = new Room("dungeonroom21", "You are at another dead end." , "Go West");
+       dungeonroom21 = new Room("dungeonroom21", "You are at another dead end." , "You can go West");
         
-       dungeonroom22 = new Room("dungeonroom22", "You are at yet another dead end." , "Go East");
+       dungeonroom22 = new Room("dungeonroom22", "You are at yet another dead end." , "You can go East");
         
         
 
         // initialise room exits like this
-        inn.addExit("east", room2);
+        inn.addExit("north", citygate);
+        inn.addExit("west", guardtower);
+        inn.addExit("south", market2);
         
-        market1.addExit
         
-        market2.addExit
+        market1.addExit("north", guardtower);
+        market1.addExit("east", inn);
+        market1.addExit("south", residential1);
         
-        residential1.addExit
+        market2.addExit("north", inn);
+        market2.addExit("west", market1);
+        market2.addExit("south", residential2);
         
-        residential2.addExit
+        residential1.addExit("north", market1);
+        residential1.addExit("west", outsidesoldierbarracks);
+        residential1.addExit("east", residential2);
         
-        citygate.addExit
+        residential2.addExit("north", market2);
+        residential2.addExit("west", residential1);
         
-        insidethewatermill.addExit
+        citygate.addExit("north", cropfields);
+        citygate.addExit("west", outsidethewatermill);
+        citygate.addExit("south", inn);
         
-        outsidethewatermill.addExit
+        insidethewatermill.addExit("south", outsidethewatermill);
         
-        topoftheguardtower.addExit
+        outsidethewatermill.addExit("north", insidethewatermill);
+        outsidethewatermill.addExit("west", castlegarden);
+        outsidethewatermill.addExit("east", citygate);
+        outsidethewatermill.addExit("south", guardtower);
         
-        guardtower.addExit
+        topoftheguardtower.addExit("guardtower", guardtower);
         
-        forest.addExit
+        guardtower.addExit("north", outsidethewatermill);
+        guardtower.addExit("west", castlegates);
+        guardtower.addExit("east", inn);
+        guardtower.addExit("south", market1);
         
-        castle.addExit
+        forest.addExit("south", cropfields);
         
-        castlegarden.addExit
+        castle.addExit("north", secrettunnel);
+        castle.addExit("east", castlegates);
         
-        castlegates.addExit
+        castlegarden.addExit("north", dungeonentrance);
+        castlegarden.addExit("west", secrettunnel);
+        castlegarden.addExit("east", outsidethewatermill);
+        castlegarden.addExit("south", castlegates);
         
-        outsidethesoldierbarracks.addExit
+        castlegates.addExit("north", castlegarden);
+        castlegates.addExit("west", castle);
+        castlegates.addExit("east", guardtower);
+        castlegates.addExit("south", outsidethesoldierbarracks);
         
-        insidethesoldierbarracks.addExit
+        outsidethesoldierbarracks.addExit("north", castlegates);
+        outsidethesoldierbarracks.addExit("east", residential1);
+        outsidethesoldierbarracks.addExit("south", insidethesoldierbarracks);
         
-        hallowedouttree.addExit
+        insidethesoldierbarracks.addExit("north", outsidethesoldierbarracks);
         
-        secrettunnel.addExit
+        hallowedouttree.addExit("east", forest);
         
-        dungeonentrance.addExit
+        secrettunnel.addExit("east", castlegarden);
+        secrettunnel.addExit("south", castle);
         
-        dungeonmainroom.addExit
+        dungeonentrance.addExit("south", castlegarden);
         
-        dungeonroom3.addExit
+        dungeonmainroom.addExit("north", dungeonroom15);
+        dungeonmainroom.addExit("west", dungeonroom13);
+        dungeonmainroom.addExit("east", dungeonroom3);
+        dungeonmainroom.addExit("south", dungeonentrance);
         
-        dungeonroom4.addExit
+        dungeonroom3.addExit("west", dungeonmainroom);
+        dungeonroom3.addExit("east", dungeonroom4);
         
-        dungeonroom5.addExit
+        dungeonroom4.addExit("west", dungeonroom3);
+        dungeonroom4.addExit("north", dungeonroom5);
         
-        dungeonroom6.addExit
+        dungeonroom5.addExit("north", dungeonroom6);
+        dungeonroom5.addExit("south", dungeonroom4);
         
-        dungeonroom7.addExit
+        dungeonroom6.addExit("east", dungeonroom7);
+        dungeonroom6.addExit("south", dungeonroom5);
+        
+        dungeonroom7.addExit("west", dungeonroom 6);
+        dungeonroom7.addExit("east", dungeonroom8);
 
-        dungeonroom8.addExit
+        dungeonroom8.addExit("west", dungeonroom7);
+        dungeonroom8.addExit("south", dungeonroom9);
         
-        dungeonroom9.addExit
+        dungeonroom9.addExit("north", dungeonroom8);
+        dungeonroom9.addExit("south", dungeonroom10);
         
-        dungeonroom10.addExit
+        dungeonroom10.addExit("north", dungeonroom9);
+        dungeonroom10.addExit("west", dungeonroom22);
+        dungeonroom10.addExit("east", dungeonroom11);
         
-        dungeonroom11.addExit
+        dungeonroom11.addExit("north", dungeonroom19);
+        dungeonroom11.addExit("west", dungeonroom10);
+        dungeonroom11.addExit("east", dungeonroom12);
         
-        dungeonroom12.addExit
+        dungeonroom12.addExit("west", dungeonroom11);
         
-        dungeonroom13.addExit
         
-        dungeonroom14.addExit
+        dungeonroom13.addExit("north", dungeonroom14);
+        dungeonroom13.addExit("east", dungeonroom2); 
         
-        dungeonroom15.addExit
+        dungeonroom14.addExit("east", dungeonroom15);
+        dungeonroom14.addExit("south", dungeonroom13);
+       
         
-        dungeonroom16.addExit
+        dungeonroom15.addExit("north", dungeonroom16);
+        dungeonroom15.addExit("west", dungeonroom14);
+        dungeonroom15.addExit("south", dungeonmainroom);
         
-        dungeonroom17.addExit
+        dungeonroom16.addExit("north", dungeonroom17);
+        dungeonroom16.addExit("south", dungeonroom15);
         
-        dungeonroom18.addExit
         
-        dungeonroom19.addExit
+        dungeonroom17.addExit("north", dungeonroom18);
+        dungeonroom17.addExit("west", dungeonroom20);
+        dungeonroom17.addExit("east", dungeonroom21);
+        dungeonroom17.addExit("south", dungeonroom16);
         
-        dungeonroom20.addExit
+        dungeonroom18.addExit("east", dungeonroom19);
+        dungeonroom18.addExit("south", dungeonroom17);
         
-        dungeonroom21.addExit
         
-        dungeonroom22.addExit
+        dungeonroom19.addExit("west", dungeonroom18);
+        dungeonroom19.addExit("south", dungeonroom11);
+        
+        dungeonroom20.addExit("east", dungeonroom17);
+        
+        dungeonroom21.addExit("west", dungeonroom17);
+        
+        dungeonroom22.addExit("east", dungeonroom10);
         
         
         
