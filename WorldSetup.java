@@ -11,6 +11,12 @@ import java.util.ArrayList;
  */
 public class WorldSetup
 {
+    Room inn, market1, market2, residential1, residential2, citygate, cropfields, insidethewatermill, outsidethewatermill, topoftheguardtower, guardtower, forest, castle, 
+        castlegarden, castlegates, outsidethesoldierbarracks, insidethesoldierbarracks, hollowedouttree, secrettunnel, dungeonentrance, dungeonmainroom, dungeonroom3,
+        dungeonroom4, dungeonroom5, dungeonroom6, dungeonroom7, dungeonroom8, dungeonroom9, dungeonroom10, dungeonroom11, dungeonroom12, dungeonroom13, dungeonroom14,
+        dungeonroom15, dungeonroom16, dungeonroom17, dungeonroom18, dungeonroom19, dungeonroom20, dungeonroom21, dungeonroom22;
+
+    
     private ArrayList<Room> allRooms;
 
     /**
@@ -25,6 +31,13 @@ public class WorldSetup
      */
     public void createNPCS()
     {
+        residential2.addNPC(new NPC("children", "They're running around.", null, "Gumdrops and ice cream.", null, null, null, null, null, null));
+        inn.addNPC(new NPC("barkeep", "Looks like the posterboy of a generic barkeep.", null, null, null, "You keep that up, you'll get more than just a free drink.", null, null, null, null));
+        //all barkeep lines here
+        
+        castle.addNPC(new NPC("king", "He looks just like a king should, regal and proud and incredibly thirsty.", null, "He tastes sweet, like raspberries.", null, null, null, null, null, null));
+        
+        
     }
     
     /**
@@ -32,6 +45,7 @@ public class WorldSetup
      */
     public void createItems()
     {
+        secrettunnel.addItem(new Item("key", "Looks like a key to something important.", null, null, null, null, null, null, null, null, null, false));
     }
 
     /**
@@ -40,11 +54,7 @@ public class WorldSetup
     public Room makeRooms()
     {
         //declare all the rooms on this line
-        Room inn, market1, market2, residential1, residential2, citygate, insidethewatermill, outsidethewatermill, topoftheguardtower, guardtower, forest, castle, 
-        castlegarden, castlegates, outsidethesoldierbarracks, insidethesoldierbarracks, hollowedouttree, secrettunnel, dungeonentrance, dungeonmainroom, dungeonroom3,
-        dungeonroom4, dungeonroom5, dungeonroom6, dungeonroom7, dungeonroom8, dungeonroom9, dungeonroom10, dungeonroom11, dungeonroom12, dungeonroom13, dungeonroom14,
-        dungeonroom15, dungeonroom16, dungeonroom17, dungeonroom18, dungeonroom19, dungeonroom20, dungeonroom21, dungeonroom22;
-
+        
        // create the rooms like this
        inn = new Room("inn", "You are in the city inn.  Since it’s the middle of the day, no one is inside besides the barkeep.", "The only person inside the inn is the barkeep.");
         
@@ -76,9 +86,9 @@ public class WorldSetup
         
        outsidethesoldierbarracks = new Room("outsidethesoldierbarracks", "You are outside the solider barracks.  This is where the soldiers on duty eat and rest." , "You over hear the guards complaining about the king overworking them.");
         
-       insidethesoldierbarracks = new Room ("insidethesoldierbarracks", "You are inside the soldier barracks.  All of the soldiers inside are standing around, looking a big hole in the ceiling." , "While most of the soldiers are standing under the hole in the ceiling, trying to figure out what happened, one of the soldiers is standing off to the side, looking rather nervous.  He seems to recognize you and decides to approach you. He tells you \"You’re the guy that the king hired right?  The one who’s supposed to get to the bottom of all this insanity?  Listen, I didn’t mean to for this to happen.  This morning I found this bottle outside.\" He pulls a small bottle out of his pocket, containing what looks like a tiny storm cloud.  \“I thought it looked cool, or at least was worth something, so I didn’t tell anybody.  Just a little while ago, I decided to try uncorking it, just to see what would happen right. As soon as I did, a freaking lightning bolt shot straight out and up, tearing through the ceiling.  I managed to get the cork back on before something else happened.  This thing is too destructive, so please take it.  I hope with it you can fix everything that’s been going wrong.\”  He hands you the bottle.|-getstorm");
+       insidethesoldierbarracks = new Room ("insidethesoldierbarracks", "You are inside the soldier barracks.  All of the soldiers inside are standing around, looking a big hole in the ceiling." , "While most of the soldiers are standing under the hole in the ceiling, trying to figure out what happened, one of the soldiers is standing off to the side, looking rather nervous.  He seems to recognize you and decides to approach you. He tells you \"You’re the guy that the king hired right?  The one who’s supposed to get to the bottom of all this insanity?  Listen, I didn’t mean to for this to happen.  This morning I found this bottle outside.\" He pulls a small bottle out of his pocket, containing what looks like a tiny storm cloud.  \"I thought it looked cool, or at least was worth something, so I didn’t tell anybody.  Just a little while ago, I decided to try uncorking it, just to see what would happen right. As soon as I did, a freaking lightning bolt shot straight out and up, tearing through the ceiling.  I managed to get the cork back on before something else happened.  This thing is too destructive, so please take it.  I hope with it you can fix everything that’s been going wrong.\"  He hands you the bottle.|-getstorm");
        
-       hallowedouttree = new Room("hallowedouttree", "You are inside the hollowed out tree. There are two small cots inside, it seems like the two gnomes were hiding out here. The second gnome is in the corner clutching the bottle.", "The gnome seems understandably scared, it doesn't look like he wants to fight.");
+       hollowedouttree = new Room("hallowedouttree", "You are inside the hollowed out tree. There are two small cots inside, it seems like the two gnomes were hiding out here. The second gnome is in the corner clutching the bottle.", "The gnome seems understandably scared, it doesn't look like he wants to fight.");
        
        secrettunnel = new Room("secrettunnel", "You are in a secret path in the castle. You do not know where this leads, but after following the path north, the path turns to the east.", "There is not much to look at in here. It is a dark and boring path. You do however, notice a small key attatched to a chain, hanging on the wall. You decide to take it, as the key should prove useful later on.|-ainb key");
         
@@ -143,7 +153,7 @@ public class WorldSetup
         market2.addExit("south", residential2);
         
         residential1.addExit("north", market1);
-        residential1.addExit("west", outsidesoldierbarracks);
+        residential1.addExit("west", outsidethesoldierbarracks);
         residential1.addExit("east", residential2);
         
         residential2.addExit("north", market2);
@@ -188,7 +198,7 @@ public class WorldSetup
         
         insidethesoldierbarracks.addExit("north", outsidethesoldierbarracks);
         
-        hallowedouttree.addExit("east", forest);
+        hollowedouttree.addExit("east", forest);
         
         secrettunnel.addExit("east", castlegarden);
         secrettunnel.addExit("south", castle);
@@ -212,7 +222,7 @@ public class WorldSetup
         dungeonroom6.addExit("east", dungeonroom7);
         dungeonroom6.addExit("south", dungeonroom5);
         
-        dungeonroom7.addExit("west", dungeonroom 6);
+        dungeonroom7.addExit("west", dungeonroom6);
         dungeonroom7.addExit("east", dungeonroom8);
 
         dungeonroom8.addExit("west", dungeonroom7);
@@ -233,7 +243,7 @@ public class WorldSetup
         
         
         dungeonroom13.addExit("north", dungeonroom14);
-        dungeonroom13.addExit("east", dungeonroom2); 
+        dungeonroom13.addExit("east", dungeonmainroom); 
         
         dungeonroom14.addExit("east", dungeonroom15);
         dungeonroom14.addExit("south", dungeonroom13);
@@ -268,10 +278,9 @@ public class WorldSetup
         
         
         //then add the rooms to the master list of all the rooms
-        allRooms.add(outside);
-        allRooms.add(room2);
+        allRooms.add(inn);
         
-        currentRoom = inn;  // start game inside the inn
+        
         
         //add all items to their rooms here
         //roomName.addItem(item);
@@ -280,7 +289,7 @@ public class WorldSetup
         //roomName.addNPC(npc);
         
         //return whatever room they start in
-        return outside;
+        return inn;
     }
     
     
