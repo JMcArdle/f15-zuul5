@@ -728,7 +728,11 @@ public class InternalCommandProcessor
         resolver.resolveNPCFromCurrentRoom("merchant").addTalk("\"Ah, hello good sir, see anything that interests you.?\"\nYou ask about the bottle of fire.\n\"I’m sorry good sir, but that is not for sale. I just put that there to attract customers.  it’s nothing special, really.\"");
         resolver.resolveRoom("market1").addItem(new Item("bottle", "The fire inside is brilliantly bright, and is in constant motion inside the bottle.", null, "IT BURNS", null, null, null, null, null, "You wait for the shopkeeper’s attention to go elsewhere, then you quickly grab the bottle and walk away.|-ainv fire|-ritem bottle from market1|-moditem fire grab null", null, false));
         resolver.resolveRoom("market1").addItem(new Item("fire", "The fire inside is brilliantly bright, and is in constant motion inside the bottle.", null, "IT BURNS", null, null, null, null, null, "You wait for the shopkeeper’s attention to go elsewhere, then you quickly grab the bottle and walk away.|-ainv fire|-ritem bottle from market1", null, false));
-        
+        resolver.resolveRoom("market2").addNPC(new NPC("merchant", "A middle aged man with a rough demeanor.", null, null, "Yummy yummy in my tummy!", null, null, null, null, null));
+        resolver.resolveRoom("market2").setExtraDescription("Most of the merchants selling food are dangerously low on product. But surprisingly, there is one merchant who has a large stock of various produce.  There is a large crowd around his stand since he is the only one with anything to sell.");
+        resolver.resolveNPCFromCurrentRoom("merchant").addTalk("You inquire as to how he is able to have this much stock on food.  He tells you that one of the farms, north of the city gate, has been able to grow good quality food without difficulty.  The court mage told you that none of the farmers have been able to grow any crops.  Because of this, you should go investigate the crops fields.");
+        resolver.resolveRoom("residential2").setExtraDescription("There is a group of children running around playing, but no adults to be seen. Upon further inspection of the children, you notice that one of them is clutching a small bottle in his hands, containing what looks like a strong gust of wind.");
+        resolver.resolveRoom("");
         
     }
     
