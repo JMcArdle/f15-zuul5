@@ -572,7 +572,7 @@ public class InternalCommandProcessor
                 }
                 else
                 {
-                    System.out.println("Debug: could not find the item");
+                    //don't say anything
                 }
             }
         }

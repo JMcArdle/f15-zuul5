@@ -32,10 +32,25 @@ public class WorldSetup
     public void createNPCS()
     {
         residential2.addNPC(new NPC("children", "They're running around.", null, "Gumdrops and ice cream.", null, null, null, null, null, null));
-        inn.addNPC(new NPC("barkeep", "Looks like the posterboy of a generic barkeep.", null, null, null, "You keep that up, you'll get more than just a free drink.", null, null, null, null));
+        NPC barkeep = new NPC("barkeep", "Looks like the posterboy of a generic barkeep.", null, null, null, "You keep that up, you'll get more than just a free drink.", null, null, null, null);
+        inn.addNPC(barkeep);
         //all barkeep lines here
+        barkeep.addTalk("I used to be a taxi driver, but I didn't think I was going anywhere.");
+        barkeep.addTalk("My friend's bakery burned down the other day. Now his business is toast.");
+        barkeep.addTalk("I used to be a banker, but then I lost interest.");
+        barkeep.addTalk("Back when I was a taxi driver, some people had trouble figuring out how the seatbelt worked, but... then it clicked.");
+        barkeep.addTalk("What does a father buffalo say to his son when he leaves for college? Bison.");
+        barkeep.addTalk("If I throw too many bird puns at you, remember, tucan play at that game.");
+        barkeep.addTalk("It socks to be lonely.");
+        barkeep.addTalk("I used to put on a theatrical performance about puns, but it was really just a play on words.");
+        barkeep.addTalk("I'd tell you a chemistry joke, but I'm afraid I wouldn't get a reaction.");
+        barkeep.addTalk("What did the grape say when it got stepped on? Nothing, it just let out a little whine.");
+        barkeep.addTalk("I used to have a fear of hurdles, but then I got over it.");
+        barkeep.addTalk("What ancient sock was a great philosopher? Sockratese.");
         
-        castle.addNPC(new NPC("king", "He looks just like a king should, regal and proud and incredibly thirsty.", null, "He tastes sweet, like raspberries.", null, null, null, null, null, null));
+        NPC king = new NPC("king", "He looks just like a king should, regal and proud and incredibly thirsty.", null, "He tastes sweet, like raspberries.", null, null, null, null, null, null);
+        castle.addNPC(king);
+        king.addTalk("You approach the king, he says, \"Hello good sir. You took your sweet fucking time getting here. Now that you're done liesurely meandering through town, you can get started doing you\'re fucking job. Listen, we don\'t know what\'s going on, but shit has gotten real and we don\'t know what to make of it. Everything isn\'t acting as it should and we need you to get to the bottom of it. I suggest you start at the watermill. It\'s in the northeast section of town. Don\'t you dare fuck this up, I\'m in a very iritable mood right now, my royal slippers have gone missing.|-phase1");
         
         
     }
@@ -92,11 +107,11 @@ public class WorldSetup
        
        secrettunnel = new Room("secrettunnel", "You are in a secret path in the castle. You do not know where this leads, but after following the path north, the path turns to the east.", "There is not much to look at in here. It is a dark and boring path. You do however, notice a small key attatched to a chain, hanging on the wall. You decide to take it, as the key should prove useful later on.|-ainb key");
         
-       dungeonentrance = new Room("dungeonentrance", "You are inside the dungeon entrance." , "As soon as you enter, you realize that the door behind you suddenly locks, trapping you inside. Looks like it’s a one way journey from here on out. You can go North.");
+       dungeonentrance = new Room("dungeonentrance", "You are inside the dungeon entrance.|-moditem fire use null" , "As soon as you enter, you realize that the door behind you suddenly locks, trapping you inside. Looks like it’s a one way journey from here on out. You can go North.");
         
        dungeonmainroom = new Room("dungeonmainroom", "You are inside the main room." , "You walk in only to realize that the entire room is pitch black. You can’t make any sense of where you are going and in which direction.|-moditem fire use An immense fire escapes from the bottle, lighting up the room and allowing you to see the paths ahead. You can go North, East or West.");
        
-       dungeonroom3 = new Room("dungeonroom3", "You are inside a passageway." , "You can go East or West");
+       dungeonroom3 = new Room("dungeonroom3", "You are inside a passageway.|-moditem fire use null" , "You can go East or West");
        
        dungeonroom4 = new Room("dungeonroom4", "You are inside a small hall." , "You can go West or North");
        
@@ -116,11 +131,11 @@ public class WorldSetup
        
        dungeonroom12 = new Room("dungeonroom12", "You are in an unfamiliar place." , "You feel a foreboding presence in the room, although it is not yet known to you. Only hearty laughter can be heard as you make your way closer.");
         
-       dungeonroom13 = new Room("dungeonroom13", "You are inside a small den." , "You can go East or North");
+       dungeonroom13 = new Room("dungeonroom13", "You are inside a small den.|-moditem fire use null" , "You can go East or North");
         
        dungeonroom14 = new Room("dungeonroom14", "You are inside a room with glowing diamonds." , "You can go South or East");
        
-       dungeonroom15 = new Room("dungeonroom15", "You are inside a room with catacombs." , "You can go North or South");
+       dungeonroom15 = new Room("dungeonroom15", "You are inside a room with catacombs.|-moditem fire use null" , "You can go North or South");
        
        dungeonroom16 = new Room("dungeonroom16", "You are inside a large chamber." , "You can go North or South");
         

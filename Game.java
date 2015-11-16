@@ -67,7 +67,8 @@ public class Game
         System.out.println();
         System.out.println("Welcome to <Insert Name here>!");
         System.out.println("<Insert Name Here> is an incredibly <Placeholder> text adventure game!");
-        System.out.println("Type 'help' if you need help.");
+        System.out.println("Type 'help' if you need help.\n\n\n");
+        System.out.println("You are drinking at an inn.  You have a reputation in this city as a guy that gets things done.  The court mage has come to the pub searching for you.  He tells you that things in the city are not behaving as they should.  People are unable to light fires to cook their food, water has become undrinkable, crops have stopped growing, and the weather is becoming increasingly erratic and unpredictable. He also tells you that he's missing his socks, though you're not sure how that's important. At all. The king has asked for your presence at his castle to help solve this problem.");
         System.out.println();
         System.out.println(currentRoom.getDescription());
     }
@@ -112,7 +113,7 @@ public class Game
      */
     private void printHelp() 
     {
-        System.out.println("Need to put stuff here");
+        System.out.println("Make sure to lick and torture everything. EVERYTHING. Also look around.");
     }
     
     /** 
