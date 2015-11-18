@@ -48,6 +48,10 @@ public class InternalCommandProcessor
     public void execute(String exe)
     {
         tokens = new StringTokenizer(exe, "|");
+        if (tokens.hasMoreTokens())
+        {
+            tokens.nextToken(); //remove the regular output before processing
+        }
         while(tokens.hasMoreTokens())
         {
             command = new StringTokenizer(tokens.nextToken());
@@ -924,7 +928,8 @@ public class InternalCommandProcessor
     
     private void switchCommands()
     {
-        switch(command.nextToken().trim().toLowerCase())
+        String check = command.nextToken().trim().toLowerCase();
+        switch(check)
         {
             case "-mplayer":
                 goMovePlayer();
@@ -1018,7 +1023,7 @@ public class InternalCommandProcessor
                 break;
             default:
             System.out.println("Debug: you tried to call an internal command that isn't in "+
-            "the list of available internal commands. Try checking your spelling.\n");
+            "the list of available internal commands. Try checking your spelling.\n The command was: \""+check+"\"");
         }
     }
 }

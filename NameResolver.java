@@ -104,9 +104,12 @@ public class NameResolver
     public Item resolveItemFromEquip(String target)
     {
         Item found = null;
-        if(player.getEquipped().getName().equalsIgnoreCase(target))
+        if(player.getEquipped() !=null)
         {
-            found = player.getEquipped();
+            if(player.getEquipped().getName().equalsIgnoreCase(target))
+            {
+                found = player.getEquipped();
+            }
         }
         return found;
     }

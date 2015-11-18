@@ -154,29 +154,29 @@ public class CommandProcessor
      */
     private void goGo() 
     {
-        String direction = command.getSecondWord();
+        String direction = word2;
         if (direction.equalsIgnoreCase("to")||
             direction.equalsIgnoreCase("toward")||
             direction.equalsIgnoreCase("into"))
         {
-            direction = command.getThirdWord();
+            direction = word3;
             if (direction.equalsIgnoreCase("the")||
                 direction.equalsIgnoreCase("that"))
             {
-                direction = command.getFourthWord();
-                if(command.getFifthWord() != null)
+                direction = word4;
+                if(word5 != null)
                 {
-                    direction = direction + " " + command.getFifthWord();
+                    direction = direction + " " + word5;
                 }
             }
             else
             {
-                if(command.getFourthWord() != null)
+                if(word4 != null)
                 {
-                    direction = direction + " " + command.getFourthWord();
-                    if(command.getFifthWord() != null)
+                    direction = direction + " " + word4;
+                    if(word5 != null)
                     {
-                        direction = direction + " " + command.getFifthWord();
+                        direction = direction + " " + word5;
                     }
                 }
             }
@@ -184,15 +184,15 @@ public class CommandProcessor
         }
         else
         {
-            if(command.getThirdWord() != null)
+            if(word3 != null)
             {
-                direction = direction + " " + command.getThirdWord();
-                if(command.getFourthWord() != null)
+                direction = direction + " " + word3;
+                if(word4 != null)
                 {
-                    direction = direction + " " + command.getFourthWord();
-                    if(command.getFifthWord() != null)
+                    direction = direction + " " + word4;
+                    if(word5 != null)
                     {
-                        direction = direction + " " + command.getFifthWord();
+                        direction = direction + " " + word5;
                     }
                 }
             }
@@ -297,9 +297,16 @@ public class CommandProcessor
             target = word2;
         }
         NPC npcToTalk = resolver.resolveNPCFromCurrentRoom(target);
-        output = npcToTalk.getTalk();
-        printOutput();
-        
+        if (npcToTalk != null)
+        {
+            output = npcToTalk.getTalk();
+            printOutput();
+        }
+        else
+        {
+            output = "Couldn't find them here.";
+            printOutput();
+        }
         ///Need to add a way to figure out if it should use the regular or removal talk method///
     }
     
@@ -425,7 +432,10 @@ public class CommandProcessor
             target = word2;
         }
         NPC npcToLeer = resolver.resolveNPCFromCurrentRoom(target);
-        output = npcToLeer.getLeer();
+        if (npcToLeer != null)
+            output = npcToLeer.getLeer();
+        else
+            output = "Can\'t find them.";
         if(!printOutput())
         {
             System.out.println("They don't notice.");
@@ -589,10 +599,13 @@ public class CommandProcessor
             target = word2;
         }
         Item itemToCrawl = resolver.resolveItemFromCurrentRoom(target);
-        output = itemToCrawl.getCrawl();
+        if (itemToCrawl != null)
+            output = itemToCrawl.getCrawl();
+        else
+            output = "Can\'t find what to crawl under.";
         if(!printOutput())
         {
-            System.out.println("Can't crawl under that.");
+            System.out.println("Can't find that to crawl under.");
             runInternalCommands = false;
         }
     }
@@ -609,7 +622,11 @@ public class CommandProcessor
             target = word2;
         }
         NPC npcToTorture = resolver.resolveNPCFromCurrentRoom(target);
-        output = npcToTorture.getTorture();
+        if (npcToTorture != null)
+        
+            output = npcToTorture.getTorture();
+        else
+            output = "Can\'t find who to torture.";
         if(!printOutput())
         {
             System.out.println("You can't do that to them.");
@@ -640,7 +657,10 @@ public class CommandProcessor
             target = word2;
         }
         NPC npcToEscape = resolver.resolveNPCFromCurrentRoom(target);
-        output = npcToEscape.getEscape();
+        if (npcToEscape != null)
+            output = npcToEscape.getEscape();
+        else
+            output = "Can\'t find what to escape.";
         if(!printOutput())
         {
             System.out.println("You can't escape them.");
@@ -666,8 +686,11 @@ public class CommandProcessor
         {
             target = word2;
         }
-        NPC npcToEscape = resolver.resolveNPCFromCurrentRoom(target);
-        output = npcToEscape.getEscape();
+        NPC npcToListen = resolver.resolveNPCFromCurrentRoom(target);
+        if (npcToListen != null)
+            output = npcToListen.getListen();
+        else
+            output = "Can\'t find them to listen to.";
         if(!printOutput())
         {
             System.out.println("They don't say anything.");
@@ -891,15 +914,22 @@ public class CommandProcessor
     
     private boolean printOutput()
     {
-        StringTokenizer toPrint = new StringTokenizer(output, "|");
-        if(toPrint.hasMoreTokens())
+        if (output == null)
         {
-            System.out.println(toPrint.nextToken());
-            return true;
+            return false;
         }
         else
         {
-            return false;
+                StringTokenizer toPrint = new StringTokenizer(output, "|");
+            if(toPrint.hasMoreTokens())
+            {
+                System.out.println(toPrint.nextToken());
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }
