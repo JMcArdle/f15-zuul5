@@ -97,7 +97,7 @@ public class WorldSetup
         
        castlegarden = new Room("castlegarden", "You are in the garden outside the castle.  Not many people come here, and because of this it is very quiet and peaceful here." , "As you look around the garden, you notice a large statue of what used to be a bust of a person, but is now indistinguishable.");
        
-       castlegates = new Room("castlegates", "You are at the castle gates, the entrance to the castle.  There seem to be many more guards at the front gate than usual." , "Some of the guards are talking amongst each other.  You over hear them say that they think the king is being overly cautious and that he should stop making them work so hard.");
+       castlegates = new Room("castlegates", "You are at the castle gates, the entrance to the castle.  There seem to be many more guards at the front gate than usual." , "Some of the guards are talking amongst each other.  You over hear them say that they think the king is being overly cautious and that he should stop making them work so hard. You aslo overhear one guard complaining about how he can't find his socks.");
         
        outsidethesoldierbarracks = new Room("outsidethesoldierbarracks", "You are outside the solider barracks.  This is where the soldiers on duty eat and rest." , "You over hear the guards complaining about the king overworking them.");
         
@@ -290,11 +290,52 @@ public class WorldSetup
         
         
         //then add the rooms to the master list of all the rooms
+        allRooms = new ArrayList<Room>();
+        
         allRooms.add(inn);
+        allRooms.add(market1);
+        allRooms.add(market2);
+        allRooms.add(residential1);
+        allRooms.add(residential2);
+        allRooms.add(citygate);
+        allRooms.add(cropfields);
+        allRooms.add(insidethewatermill);
+        allRooms.add(outsidethewatermill);
+        allRooms.add(topoftheguardtower);
+        allRooms.add(guardtower);
+        allRooms.add(forest);
+        allRooms.add(castle);
+        allRooms.add(castlegarden);
+        allRooms.add(castlegates);
+        allRooms.add(outsidethesoldierbarracks);
+        allRooms.add(insidethesoldierbarracks);
+        allRooms.add(hollowedouttree);
+        allRooms.add(secrettunnel);
+        allRooms.add(dungeonentrance);
+        allRooms.add(dungeonmainroom);
+        allRooms.add(dungeonroom3);
+        allRooms.add(dungeonroom4);
+        allRooms.add(dungeonroom5);
+        allRooms.add(dungeonroom6);
+        allRooms.add(dungeonroom7);
+        allRooms.add(dungeonroom8);
+        allRooms.add(dungeonroom9);
+        allRooms.add(dungeonroom10);
+        allRooms.add(dungeonroom11);
+        allRooms.add(dungeonroom12);
+        allRooms.add(dungeonroom13);
+        allRooms.add(dungeonroom14);
+        allRooms.add(dungeonroom15);
+        allRooms.add(dungeonroom16);
+        allRooms.add(dungeonroom17);
+        allRooms.add(dungeonroom18);
+        allRooms.add(dungeonroom19);
+        allRooms.add(dungeonroom20);
+        allRooms.add(dungeonroom21);
+        allRooms.add(dungeonroom22);
         
-        
-        
-        //add all items to their rooms here
+  
+         //add all items to their rooms here
         //roomName.addItem(item);
         
         //all npcs to their rooms here
