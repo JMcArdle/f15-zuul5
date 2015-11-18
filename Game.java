@@ -34,9 +34,11 @@ public class Game
     /**
      * Create all the rooms and link their exits together.
      */
-    private void createRooms()
+    private void setup()
     {
         currentRoom = setUp.makeRooms();
+        setUp.createNPCS();
+        setUp.createItems();
     }
 
     /**
@@ -44,7 +46,7 @@ public class Game
      */
     public void play() 
     {
-        createRooms();
+        setup();
         processor = new CommandProcessor(currentRoom, player, setUp.getRoomList());
         
         printWelcome();

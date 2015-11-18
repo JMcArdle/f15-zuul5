@@ -696,6 +696,19 @@ public class InternalCommandProcessor
         System.exit(0);
     }
     
+    private void win()
+    {
+        System.out.println("YOU WIN. Press enter to close the game.");
+        try
+        {
+            System.in.read();
+        }
+        catch(Exception E)
+        {
+        }
+        System.exit(0);
+    }
+    
     private void goPhase1()
     {
         resolver.resolveRoom("citygate").setDescription("You are at the city gate.  There is a blood trail leading outside the city.");
@@ -796,11 +809,6 @@ public class InternalCommandProcessor
         phase3Check();
     }
     
-    private void unlockDoor()
-    {
-        resolver.resolveRoom("dungeonroom17").addExit("door", resolver.resolveRoom("dungeonroom18"));
-    }
-    
     private void kidBottle()
     {
         resolver.resolveRoom("residential2").addItem(new Item("wind", "The force of the wind is almost moving the bottle in your hands. The wind inside is constantly moving and changing directions. You should keep this for now, in case you need it later.", null, "Tastes like the winds.", null, null, null, null, null, null, null, false));
@@ -838,10 +846,49 @@ public class InternalCommandProcessor
     {
         resolver.resolveRoom("castle").addExit("secret path", resolver.resolveRoom("secretpath"));
     }
+    
+    private void makeKeyWork()
+    {
+        resolver.resolveItemFromInventory("key").setUse("key use You use the key to unlock the door, allowing entrance to another room. You can go North, East, or West.|-usekey");
+    }
+    
+    private void useKey()
+    {
+        resolver.resolveRoom("dungeonroom17").addExit("door", resolver.resolveRoom("dungeonroom18"));
+        resolver.resolveRoom("dungeonroom17").addExit("north", resolver.resolveRoom("dungeonroom18"));
+    }
+    
+    private void makeLifeWork()
+    {
+        resolver.resolveItemFromInventory("life").setUse("A green essence is released from the bottle and shrouds itself around the statue, causing it to shake and come to life. The statue takes one step to the right and sits down, revealing the exits. You can go West and East.|-uselife");
+    }
+    
+    private void useLife()
+    {
+        resolver.resolveRoom("dungoenroom11").addExit("east", resolver.resolveRoom("dungeonroom12"));
+    }
+    
+    
+    private void setupFinalBattle()
+    {
+        resolver.resolveItemFromInventory("fire").setUse("You uncork the bottle and aim it at the king.  Energy explodes outward toward the gnome king.  The energy strikes his beard.  But his beard seems to absorb it.  His beard then surges forward and engulfs you. The mass of his beard keeps expanding and growing.  There is no way for you to get out.  You slowly suffocate under the awesome might of his beard.\n\nGame Over.|-gameover");
+        resolver.resolveItemFromInventory("wind").setUse("You uncork the bottle and aim it at the king.  Energy explodes outward toward the gnome king.  The energy strikes his beard.  But his beard seems to absorb it.  His beard then surges forward and engulfs you. The mass of his beard keeps expanding and growing.  There is no way for you to get out.  You slowly suffocate under the awesome might of his beard.\n\nGame Over.|-gameover");
+        resolver.resolveItemFromInventory("life").setUse("You uncork the bottle and aim it at the king.  Energy explodes outward toward the gnome king.  The energy strikes his beard.  But his beard seems to absorb it.  His beard then surges forward and engulfs you. The mass of his beard keeps expanding and growing.  There is no way for you to get out.  You slowly suffocate under the awesome might of his beard.\n\nGame Over.|-gameover");
+        resolver.resolveItemFromInventory("lightning").setUse("You uncork the storm cloud bottle and aim it at the gnome king.  A lance of pure lighting rushes out of the bottle and\n"+
+            "strikes the gnome king in his beard.  The gnome king staggers back, clearly affected by the powerful blast.\n"+
+            "It tears a hole through the beard, but you can see it start to regenerate.  You see that the gnome king is still\n"+
+            "recovering from the blast, so you run up to him, and crack the storm cloud bottle over his head.  Electrical energy\n"+
+            "explodes out of the bottle.  Both you and the gnome king a thrown back from the impact.  You land on you back and look\n"+
+            "up to see what happened.  The gnome king is suspended in midair, being torn to shreds by the storm of energy.  After a\n"+
+            "couple of seconds, he falls.  You walk over to him, to find him clearly dead.  Most of his flesh has been burnt off, as\n"+
+            "well as his beard.  No one would have been able to survive the amount of energy that he withstood.  You than pick up the\n"+
+            "sock bottle, and then tell all the gnomes watching to scram.  After seeing what happened to their king, they all rush\n"+
+            "out. It would seem that you have stopped the gnome threat, and saved the city.  No longer will anyone’s feet in the\n"+
+            "kingdom go cold at night.\n\nCongratulations, you have won the game!|-wingame");
+        }
+    
         
-    
-    
-    
+        
     private void goCheckInventory()
     {
         if(command.countTokens() >= 4)
@@ -978,6 +1025,9 @@ public class InternalCommandProcessor
             case "-gameover":
                 goGameOver();
                 break;
+            case "-wingame":
+                win();
+                break;
             case "-phase1":
                 goPhase1();
                 break;
@@ -999,9 +1049,6 @@ public class InternalCommandProcessor
             case "-bottledrop":
                 bottleDrop();
                 break;
-            case "-unlockdoor":
-                unlockDoor();
-                break;
             case "-kidbottle":
                 kidBottle();
                 break;
@@ -1013,6 +1060,21 @@ public class InternalCommandProcessor
                 break;
             case "-unlocksecretpath":
                 unlockSecretPath();
+                break;
+            case "-makekeywork":
+                makeKeyWork();
+                break;
+            case "-useKey":
+                useKey();
+                break;
+            case "-makelifework":
+                makeLifeWork();
+                break;
+            case "-uselife":
+                useLife();
+                break;
+            case "-setupfinalbattle":
+                setupFinalBattle();
                 break;
 
             case "-checkinv":

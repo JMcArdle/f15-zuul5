@@ -45,6 +45,7 @@ public class CommandProcessor
      */
     public void processCommand(Command command) 
     {
+        output = null;
         if(command.numberOfWords() < 2)
         {
             System.out.println("You can't do anything without saying what to do it to or at.");
@@ -577,13 +578,20 @@ public class CommandProcessor
         
         Random rng = new Random();
         int goTo = rng.nextInt(currentRoom.getNumExits());
-        Room[] exits = (Room[]) (currentRoom.getAllExits().keySet().toArray());
-        currentRoom = exits[goTo];
-        output = currentRoom.getDescription();
-        if(!printOutput())
+        if (goTo == 0)
         {
-            System.out.println("You enter the room.");
-            runInternalCommands = false;
+            System.out.println("The door closes behind you, there's no way to escape!");
+        }
+        else
+        {
+            Room[] exits =(currentRoom.getAllExits().values().toArray(new Room[0]));
+            currentRoom = exits[goTo];
+            output = currentRoom.getDescription();
+            if(!printOutput())
+            {
+                System.out.println("You enter the room.");
+                runInternalCommands = false;
+            }
         }
     }
     

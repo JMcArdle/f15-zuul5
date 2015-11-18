@@ -52,6 +52,9 @@ public class WorldSetup
         castle.addNPC(king);
         king.addTalk("You approach the king, he says, \"Hello good sir. You took your sweet fucking time getting here. Now that you're done liesurely meandering through town, you can get started doing you\'re fucking job. Listen, we don\'t know what\'s going on, but shit has gotten real and we don\'t know what to make of it. Everything isn\'t acting as it should and we need you to get to the bottom of it. I suggest you start at the watermill. It\'s in the northeast section of town. Don\'t you dare fuck this up, I\'m in a very iritable mood right now, my royal slippers have gone missing.|-phase1");
         
+        NPC gnomeKing = new NPC("Gnome King", "He looks rather large for a gnome. Even though he\'s three feet tall, he\'s very intimidating.", "You rush the king hoping to catch him off guard.  You reach him, but then his beard quickly engulfs you.  The mass of his beard keeps expanding and growing.  There is no way for you to get out.  You slowly suffocate under the awesome might of his beard.\n\nGame over.|-gameover", null, "Tastes like my cat.", null, null, null, null, null);
+        gnomeKing.addTalk("Why are you here tall one?  You have already ruined all the fun we were having with your town.  I don\'t really care that you were able to free all the forces that we bottled, because we got what we originally wanted anyway.\"  He then holds up a bottled containing what looks like a pair of socks.  \"That\'s right!  It was us who stole all the socks from your town.  Do you have any idea what it\'s like to live underground without any socks?  Our feet are cold as shit.  And when we asked the humans to make some socks for us, they laughed in our faces!  We gnomes can'\t figure out how to make socks for ourselves.  So if we can\'t have any, then NO ONE CAN!\" He then leaps off of his throne, landing in front of you, ready to fight.  As he stands before you, you notice his beard start to grow and move.  “You stand before Billiam Wosbie, the Gnome king!  None have ever been able to stand up to the might of my beard.  Its power is unrivaled throughout the land.\"  You can feel an insanely powerful energy emanating from the king\'s beard.  Anything but your strongest attack won\'t be able to stand up against him.");
+        
         
     }
     
@@ -61,6 +64,7 @@ public class WorldSetup
     public void createItems()
     {
         secrettunnel.addItem(new Item("key", "Looks like a key to something important.", null, null, null, null, null, null, null, null, null, false));
+        dungeonroom17.addItem(new Item("door", "Upon further inspection, there seems to be a small lock attached to it.", null, null, null, null, null, null, null, null, null, false));
     }
 
     /**
@@ -119,17 +123,17 @@ public class WorldSetup
         
        dungeonroom6 = new Room("dungeonroom6", "You are inside a room filled with water." , "You can go East or South");
        
-       dungeonroom7 = new Room("dungeonroom7", "You are inside a room with holes." , "You can go East or West");
+       dungeonroom7 = new Room("dungeonroom7", "You are inside a room with holes.|-mod item wind use null" , "You can go East or West");
        
-       dungeonroom8 = new Room("dungeonroom8", "You are inside a tunnel." , "You see that the entire room is deep in fog.  Its so dense that you cannot find your way through.|-moditem wind use A gust of wind releases from the bottle, blowing away all the fog surrounding the area. You are able to see the path ahead of you. You can go West or South.");
+       dungeonroom8 = new Room("dungeonroom8", "You are inside a tunnel." , "You see that the entire room is deep in fog.  It\'s so dense that you cannot find your way through.|-moditem wind use A gust of wind releases from the bottle, blowing away all the fog surrounding the area. You are able to see the path ahead of you splits West and South.");
        
-       dungeonroom9 = new Room("dungeonroom9", "You are inside a large tunnel." , "You can go North or South");
+       dungeonroom9 = new Room("dungeonroom9", "You are inside a large tunnel.|-mod item wind use null" , "You can go North or South");
        
-       dungeonroom10 = new Room("dungeonroom10", "You are inside a narrow corridor." , "You can go West or East");
+       dungeonroom10 = new Room("dungeonroom10", "You are inside a narrow corridor.|-mod item life use null" , "You can go West or East");
         
-       dungeonroom11 = new Room("dungeonroom11", "You are inside a large room." , "As you enter, you approach a giant statue covering the exit. Pushing it seems impossible, it barely moves an inch.|-moditem life use A green essence is released from the bottle and shrouds itself around the statue, causing it to shake and come to life. The statue takes one step to the right and sits down, revealing the exits. You can go West and East.");
+       dungeonroom11 = new Room("dungeonroom11", "You are inside a large room.|-makelifework" , "As you enter, you approach a giant statue covering the exit. Pushing it seems impossible, it barely moves an inch.|-moditem life use ");
        
-       dungeonroom12 = new Room("dungeonroom12", "You are in an unfamiliar place." , "You feel a foreboding presence in the room, although it is not yet known to you. Only hearty laughter can be heard as you make your way closer.");
+       dungeonroom12 = new Room("dungeonroom12", "You enter the gnome king\'s lair. The room almost looks like an underground throne room.  Dozens of brightly light torches adorn the walls.  As you enter the room, you notice hundreds of gnomes gathered in the hall off to the side.  They all turn to stare at you expectantly.  At the end of the room is a rather small looking throne made of what looks like obsidian.  Sitting atop is a very large gnome, about 3 feet tall.  He has rough facial features, and sported a very impressive beard.  He too, was staring at you as you entered the room.|-setupfinalbattle" , "As you look around the room, you wonder as to why all of the gnomes haven’t attacked you yet.  It seems as if they are letting their king handle you.");
         
        dungeonroom13 = new Room("dungeonroom13", "You are inside a small den.|-moditem fire use null" , "You can go East or North");
         
@@ -137,17 +141,17 @@ public class WorldSetup
        
        dungeonroom15 = new Room("dungeonroom15", "You are inside a room with catacombs.|-moditem fire use null" , "You can go North or South");
        
-       dungeonroom16 = new Room("dungeonroom16", "You are inside a large chamber." , "You can go North or South");
+       dungeonroom16 = new Room("dungeonroom16", "You are inside a large chamber.|-mod item key use null" , "You can go North or South");
         
-       dungeonroom17 = new Room("dungeonroom17", "You are inside a very large room." , "As you enter, you notice a strange looking door at the other end of the room. Upon further inspection, there seems to be a small lock attached to it.|-moditem key use You use the key to unlock the door, allowing entrance to another room. You can go North, East, or West.|-unlockdoor");
+       dungeonroom17 = new Room("dungeonroom17", "As you enter, you notice a strange looking door at the other end of the room.|-makekeywork", "Upon further inspection, there seems to be a small lock attached to it.");
         
-       dungeonroom18 = new Room("dungeonroom18", "You are inside a room with staircases." , "You can go South or East");
+       dungeonroom18 = new Room("dungeonroom18", "You are inside a room with staircases.|-mod item key use null" , "You can go South or East");
         
-       dungeonroom19 = new Room("dungeonroom19", "You are inside a passageway." , "You can go West or South");
+       dungeonroom19 = new Room("dungeonroom19", "You are inside a passageway.|-mod item life use null" , "You can go West or South");
         
-       dungeonroom20 = new Room("dungeonroom20", "You are at a dead end." , "You can go East");
+       dungeonroom20 = new Room("dungeonroom20", "You are at a dead end.|-mod item key use null" , "You can go East");
         
-       dungeonroom21 = new Room("dungeonroom21", "You are at another dead end." , "You can go West");
+       dungeonroom21 = new Room("dungeonroom21", "You are at another dead end.|-mod item key use null" , "You can go West");
         
        dungeonroom22 = new Room("dungeonroom22", "You are at yet another dead end." , "You can go East");
         
@@ -191,6 +195,8 @@ public class WorldSetup
         guardtower.addExit("west", castlegates);
         guardtower.addExit("east", inn);
         guardtower.addExit("south", market1);
+        guardtower.addExit("tower",topoftheguardtower);
+        guardtower.addExit("guard tower", topoftheguardtower);
         
         forest.addExit("south", cropfields);
         
@@ -249,10 +255,6 @@ public class WorldSetup
         
         dungeonroom11.addExit("north", dungeonroom19);
         dungeonroom11.addExit("west", dungeonroom10);
-        dungeonroom11.addExit("east", dungeonroom12);
-        
-        dungeonroom12.addExit("west", dungeonroom11);
-        
         
         dungeonroom13.addExit("north", dungeonroom14);
         dungeonroom13.addExit("east", dungeonmainroom); 
